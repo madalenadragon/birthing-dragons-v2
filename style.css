@@ -171,12 +171,12 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; line-height
 
 .nav-logo {
   font-family: var(--font-heading);
-  font-size: 1rem;
+  font-size: 0.82rem;
   letter-spacing: 0.2em;
   color: var(--gold);
   text-transform: uppercase;
 }
-.nav-logo span { display: block; font-size: 0.55rem; letter-spacing: 0.35em; color: var(--cream-dim); margin-top: 2px; }
+.nav-logo span { display: block; font-size: 0.52rem; letter-spacing: 0.35em; color: var(--cream-dim); margin-top: 2px; }
 
 .nav-links {
   display: flex;
@@ -635,6 +635,47 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; line-height
   color: var(--gold);
   flex-shrink: 0;
   font-family: var(--font-display);
+}
+
+/* ============================================
+   COURSES PAGE
+   ============================================ */
+.course-card {
+  padding: 2rem 2rem;
+}
+
+.course-card-inner {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.course-art {
+  height: 200px;
+  background: linear-gradient(135deg, var(--deep-forest), var(--obsidian));
+  border: 1px solid rgba(196,152,90,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.course-art span {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: rgba(196,152,90,0.5);
+}
+
+@media (max-width: 768px) {
+  .course-card-inner {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .course-art {
+    height: 140px;
+  }
 }
 
 /* ============================================
