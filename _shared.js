@@ -1,10 +1,8 @@
 /* BIRTHING DRAGONS — SHARED JS — include at bottom of every page */
 
 /* ── GOOGLE ANALYTICS ── */
-/* TODO: Replace G-XXXXXXXXXX with your real Measurement ID from analytics.google.com */
 (function(){
-  var GA_ID = 'G-XXXXXXXXXX'; // ← REPLACE THIS
-  if (GA_ID === 'G-XXXXXXXXXX') return; // remove this line once ID is set
+  var GA_ID = 'G-NFC9EHWEQ3';
   var s = document.createElement('script');
   s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
   document.head.appendChild(s);
