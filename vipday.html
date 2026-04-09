@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIP Day with Madalena | Birthing Dragons</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --black:#060408;--deep:#0a0710;--dark:#0d0b14;--dark2:#12101c;
+      --gold:#c9a84c;--gold-l:#e8d48e;--gold-d:rgba(201,168,76,.16);
+      --crimson:#8B1A3A;--crimson-l:#c4405e;
+      --rose:#b87c82;--rose-d:rgba(184,124,130,.15);
+      --white:#f5f0eb;--cream:#ede5d8;--cream-d:rgba(237,229,216,.5);
+      --serif:'Cormorant Garamond',Georgia,serif;--sans:'Montserrat',sans-serif;
+      --scale-bg:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='48'%3E%3Cellipse cx='28' cy='48' rx='28' ry='18' fill='none' stroke='rgba(201%2C168%2C76%2C0.06)' stroke-width='0.8'/%3E%3Cellipse cx='0' cy='24' rx='28' ry='18' fill='none' stroke='rgba(201%2C168%2C76%2C0.06)' stroke-width='0.8'/%3E%3Cellipse cx='56' cy='24' rx='28' ry='18' fill='none' stroke='rgba(201%2C168%2C76%2C0.06)' stroke-width='0.8'/%3E%3C/svg%3E");
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--black);color:var(--white);font-family:var(--sans);-webkit-font-smoothing:antialiased;cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="22" viewBox="0 0 16 22"><path d="M2 2 L2 18 L6 14 L8.5 20 L11 19 L8.5 13 L13 13 Z" fill="%23c9a84c" stroke="%23604008" stroke-width="1.2" stroke-linejoin="round"/></svg>') 2 2,default;overflow-x:hidden;}
+    .sparkle-burst{position:fixed;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);}
+    .sparkle-burst span{position:absolute;width:6px;height:6px;border-radius:50%;transform:translate(-50%,-50%);animation:sparkle-fly .65s ease-out forwards;}
+    @keyframes sparkle-fly{0%{opacity:1;transform:translate(0,0) scale(1);}100%{opacity:0;transform:translate(var(--bx),var(--by)) scale(0);}}
+    .reveal{opacity:0;transform:translateY(36px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);}
+    .reveal.visible{opacity:1;transform:none;}
+    .reveal-delay-1{transition-delay:.12s;}.reveal-delay-2{transition-delay:.24s;}.reveal-delay-3{transition-delay:.36s;}
+
+    #main-nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:center;justify-content:space-between;padding:24px 60px;transition:background .4s,border-color .4s,padding .3s;border-bottom:1px solid transparent;}
+    #main-nav.scrolled{background:rgba(6,4,8,.92);backdrop-filter:blur(20px);border-color:var(--gold-d);padding:14px 60px;}
+    .nav__logo{font-family:var(--serif);font-size:11px;letter-spacing:.24em;color:var(--white);text-decoration:none;text-transform:uppercase;line-height:1.6;display:flex;align-items:center;gap:10px;}
+    .nav__logo img{height:38px;width:auto;}
+    .nav__logo span{display:block;font-style:italic;font-size:9px;letter-spacing:.3em;color:var(--gold);margin-top:2px;} .nav__logo img{height:40px;width:auto;}
+    .nav__links{display:flex;align-items:center;gap:20px;list-style:none;}
+    .nav__links a{font-family:var(--sans);font-size:10px;letter-spacing:.18em;color:var(--cream-d);text-decoration:none;text-transform:uppercase;transition:color .2s;}
+    .nav__links a:hover,.nav__links a.active{color:var(--gold);}
+    .nav__cta-btn{display:inline-block;padding:10px 22px;border:1px solid var(--gold);color:var(--gold) !important;font-family:var(--sans);font-size:9px;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;transition:background .25s,color .25s;}
+    .nav__cta-btn:hover{background:var(--gold);color:var(--black) !important;}
+
+    .btn{display:inline-block;font-family:var(--sans);font-size:10px;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;padding:16px 42px;transition:all .3s;cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="22" viewBox="0 0 16 22"><path d="M2 2 L2 18 L6 14 L8.5 20 L11 19 L8.5 13 L13 13 Z" fill="%23c9a84c" stroke="%23604008" stroke-width="1.2" stroke-linejoin="round"/></svg>') 2 2,default;position:relative;overflow:hidden;}
+    .btn::after{content:'';position:absolute;inset:0;transform:translateX(-101%);transition:transform .35s cubic-bezier(.65,0,.35,1);z-index:-1;}
+    .btn--gold{border:1px solid var(--gold);color:var(--gold);}.btn--gold::after{background:var(--gold);}.btn--gold:hover{color:var(--black);}.btn--gold:hover::after{transform:translateX(0);}
+    .btn--filled{background:var(--gold);color:var(--black);border:1px solid var(--gold);font-weight:600;}.btn--filled:hover{background:transparent;color:var(--gold);}
+    .magnetic{will-change:transform;}
+
+    .section{padding:110px 60px;}
+    .container{max-width:1100px;margin:0 auto;}
+    .eyebrow{font-family:var(--sans);font-size:9.5px;letter-spacing:.36em;color:var(--gold);text-transform:uppercase;margin-bottom:20px;}
+    .section-title{font-family:var(--serif);font-weight:600;line-height:1.0;letter-spacing:.03em;color:var(--white);text-transform:uppercase;font-size:clamp(40px,5.5vw,72px);}
+    .section-title em{font-style:italic;background:linear-gradient(135deg,#c9a84c 0%,#f0e0a0 40%,#c9a84c 70%,#9a7830 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-transform:none;font-weight:600;}
+    .section-body{font-family:var(--serif);font-size:18px;line-height:1.95;color:var(--cream);}
+
+    /* HERO */
+    .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.18),transparent 55%),radial-gradient(ellipse at 80% 90%,rgba(139,26,58,.16),transparent 55%),radial-gradient(ellipse at 10% 60%,rgba(201,168,76,.08),transparent 50%),var(--black);}
+    .hero::after{content:'';position:absolute;inset:0;background:var(--scale-bg);opacity:.4;}
+    canvas#stars{position:absolute;inset:0;width:100%;height:100%;}
+    .hero__inner{position:relative;z-index:2;max-width:900px;padding:0 40px;}
+    .hero__label{font-family:var(--sans);font-size:9px;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;display:flex;align-items:center;justify-content:center;gap:16px;}
+    .hero__label::before,.hero__label::after{content:'';width:40px;height:1px;background:var(--gold);opacity:.5;}
+    .hero__title{font-family:var(--serif);font-size:clamp(58px,10vw,130px);font-weight:600;line-height:.88;letter-spacing:.02em;text-transform:uppercase;margin-bottom:20px;}
+    .hero__title em{font-style:italic;background:linear-gradient(135deg,#c9a84c 0%,#f0e0a0 40%,#c9a84c 70%,#9a7830 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-transform:none;}
+    .hero__sub{font-family:var(--serif);font-size:clamp(16px,2vw,22px);line-height:1.75;color:var(--cream-d);max-width:680px;margin:0 auto 52px;}
+    .hero__location{font-family:var(--sans);font-size:9px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:44px;opacity:.7;}
+
+    /* PILLARS */
+    .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--gold-d);}
+    @media(max-width:800px){.pillars{grid-template-columns:1fr 1fr;}}
+    @media(max-width:480px){.pillars{grid-template-columns:1fr;}}
+    .pillar{background:var(--dark2);padding:48px 36px;text-align:center;position:relative;overflow:hidden;}
+    .pillar::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .5s;background:radial-gradient(ellipse at 50% 100%,rgba(201,168,76,.1),transparent 65%);}
+    .pillar:hover::before{opacity:1;}
+    .pillar__icon{font-size:36px;margin-bottom:20px;display:block;}
+    .pillar__title{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;}
+    .pillar__body{font-family:var(--serif);font-size:14px;line-height:1.75;color:var(--cream-d);}
+
+    /* EXPERIENCE SECTION */
+    .exp-wrap{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--gold-d);}
+    @media(max-width:820px){.exp-wrap{grid-template-columns:1fr;}}
+    .exp-text{background:var(--dark2);padding:80px 64px;display:flex;flex-direction:column;justify-content:center;}
+    .exp-visual{background:var(--dark);position:relative;min-height:520px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+    .exp-visual__glow{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(ellipse,rgba(201,168,76,.15),transparent 70%);animation:pulse 4s ease-in-out infinite;}
+    @keyframes pulse{0%,100%{transform:scale(1);opacity:.6;}50%{transform:scale(1.15);opacity:1;}}
+    .exp-visual__text{position:relative;z-index:2;text-align:center;padding:40px;}
+    .exp-visual__big{font-family:var(--serif);font-size:clamp(60px,8vw,100px);font-weight:600;line-height:1;color:var(--gold);opacity:.12;user-select:none;position:absolute;}
+    .portugal-tag{display:inline-block;font-family:var(--sans);font-size:8.5px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;border:1px solid var(--gold-d);padding:10px 20px;margin-bottom:24px;}
+
+    /* QUOTE / CTA */
+    .quote-section{position:relative;padding:110px 60px;text-align:center;overflow:hidden;}
+    .quote-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(201,168,76,.1),transparent 70%),var(--deep);}
+    .quote-section__scale{position:absolute;inset:0;background:var(--scale-bg);opacity:.3;}
+    .quote-text{position:relative;z-index:2;font-family:var(--serif);font-size:clamp(24px,3.5vw,44px);font-weight:300;font-style:italic;line-height:1.4;color:var(--cream);max-width:880px;margin:0 auto 28px;}
+    .quote-attr{position:relative;z-index:2;font-family:var(--sans);font-size:9.5px;letter-spacing:.36em;color:var(--gold);text-transform:uppercase;}
+    .dragon-orn{display:flex;justify-content:center;margin:32px 0;}
+    .cta-section{position:relative;padding:120px 60px;text-align:center;overflow:hidden;}
+    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.18),transparent 65%),var(--dark);}
+    .cta-section__scale{position:absolute;inset:0;background:var(--scale-bg);opacity:.25;}
+
+    footer{background:var(--deep);border-top:1px solid var(--gold-d);padding:60px;text-align:center;}
+    .footer__logo{font-family:var(--serif);font-size:11px;letter-spacing:.28em;color:var(--white);text-transform:uppercase;margin-bottom:32px;}
+    .footer__logo span{display:block;font-style:italic;font-size:9px;letter-spacing:.3em;color:var(--gold);margin-top:4px;}
+    .footer__links{display:flex;flex-wrap:wrap;justify-content:center;gap:24px;list-style:none;margin-bottom:32px;}
+    .footer__links a{font-size:9px;letter-spacing:.2em;color:var(--cream-d);text-decoration:none;text-transform:uppercase;transition:color .2s;}
+    .footer__links a:hover{color:var(--gold);}
+    .footer__copy{font-size:10px;color:rgba(237,229,216,.3);letter-spacing:.1em;}
+
+    @media(max-width:768px){
+      #main-nav{padding:20px 24px;}
+      .nav__links{display:none;}
+      .section{padding:80px 24px;}
+      .hero__inner{padding:0 24px;}
+      .exp-text{padding:60px 32px;}
+      .quote-section,.cta-section{padding:80px 24px;}
+      footer{padding:60px 24px;}
+      .two-col{grid-template-columns:1fr!important;gap:40px!important;}
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="main-nav">
+    <a href="index.html" class="nav__logo">
+      <img src="https://images.groovetech.io/uwBqZfHO5Z1kNIKup3kW5kGf9K9PI06AHXPawvYmfzM/rs:fit:0:0:0/g:no:0:0/c:0:0/aHR0cHM6Ly9hc3NldHMuZ3Jvb3ZlYXBwcy5jb20vaW1hZ2VzLzA2NWViOTEwLWM5NjEtNGViNC1hM2I4LTRmMDFlYzIyMWI4Yy8xNzQwMTc5ODA4X0lNRzIyNzAyLlBORw.webp" alt="Birthing Dragons">
+      <div class="nav__logo-text">Birthing Dragons<span>Madalena Dragon</span></div>
+    </a>
+    <ul class="nav__links">
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="mastermind.html">Mastermind</a></li>
+      <li><a href="work-with-me.html">Work With Me</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="art.html">Art</a></li>
+      <li><a href="free.html">Free</a></li>
+      <li><a href="values.html">Values</a></li>
+      <li><a href="https://activationmembershipfunnel.groovesell.com/checkout/954e206cf9a4c6685634674f333cd14c" target="_blank" class="nav__cta-btn">Join ACTIVATION</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <canvas id="stars"></canvas>
+    <div class="hero__inner">
+      <div class="hero__label reveal">Women Only · Portugal</div>
+      <h1 class="hero__title reveal">VIP Day<br><em>with Madalena</em></h1>
+      <p class="hero__location reveal">In Person · Portugal</p>
+      <p class="hero__sub reveal">"Step into the most intimate, high-level luxury experience ever: a full VIP Day with me, in Portugal, designed exclusively for the woman who leads herself with desire, devotion, and undeniable power."</p>
+      <a href="https://purchase.birthingdragons.com/checkout/449c36b00da56b6377534eb3e9a3eba2" target="_blank" class="btn btn--filled magnetic reveal reveal-delay-1">Claim Your VIP Day</a>
+    </div>
+  </section>
+
+  <!-- WHAT IT IS -->
+  <div class="exp-wrap">
+    <div class="exp-text reveal">
+      <p class="eyebrow">The Experience</p>
+      <h2 class="section-title" style="margin-bottom:28px;">Once in a <em>Lifetime</em></h2>
+      <p class="section-body" style="margin-bottom:24px;">"This is a once-in-a-lifetime, women-only immersion where it's just you and me, focused entirely on sensuality, next level business strategy, embodiment, and the kind of energetic refinement that alters the trajectory of your life and business forever."</p>
+      <p class="section-body" style="margin-bottom:24px;">"This is where your next level is activated in real-time, where your leadership recalibrates, where your body softens into deeper magnetism."</p>
+      <p class="section-body">"Curated, luxurious, unforgettable. This is the day where everything shifts."</p>
+    </div>
+    <div class="exp-visual">
+      <div class="exp-visual__big">VIP</div>
+      <div class="exp-visual__glow"></div>
+      <div class="exp-visual__text">
+        <div class="portugal-tag">Portugal · In Person</div>
+        <p style="font-family:var(--serif);font-size:clamp(20px,2.5vw,28px);color:var(--cream);line-height:1.5;font-style:italic;">"The day where<br>everything shifts."</p>
+        <p style="font-family:var(--sans);font-size:9px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-top:20px;">Madalena Dragon</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PILLARS -->
+  <section class="section" style="background:var(--dark);padding:0;">
+    <div class="pillars">
+      <div class="pillar reveal">
+        <span class="pillar__icon">🌹</span>
+        <div class="pillar__title">Sensuality</div>
+        <p class="pillar__body">Reconnect to your body as a source of power, magnetism, and aliveness.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-1">
+        <span class="pillar__icon">👑</span>
+        <div class="pillar__title">Business Strategy</div>
+        <p class="pillar__body">Next-level clarity on your offers, your positioning, and your legacy vision.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-2">
+        <span class="pillar__icon">🌿</span>
+        <div class="pillar__title">Embodiment</div>
+        <p class="pillar__body">Somatic and energetic practices to ground your expansion into your body.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-3">
+        <span class="pillar__icon">✨</span>
+        <div class="pillar__title">Energetic Refinement</div>
+        <p class="pillar__body">Clearing, upgrading, and aligning your field to your next level of leadership.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR WHO -->
+  <section class="section" style="background:var(--deep);">
+    <div class="container">
+      <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+        <div class="reveal reveal-delay-1" style="position:relative;height:440px;">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,168,76,.12),rgba(139,26,58,.1),var(--dark2));display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:90px;opacity:.14;">🌹</span>
+          </div>
+          <div style="position:absolute;inset:20px;border:1px solid var(--gold-d);"></div>
+          <div style="position:absolute;bottom:28px;left:28px;right:28px;">
+            <p style="font-family:var(--sans);font-size:9px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;text-align:center;">Women Only · In Person · Portugal</p>
+          </div>
+        </div>
+        <div class="reveal">
+          <p class="eyebrow">Who This Is For</p>
+          <h2 class="section-title" style="margin-bottom:28px;">The Woman Who <em>Leads</em></h2>
+          <p class="section-body" style="margin-bottom:20px;">This day is designed for the woman who leads herself with desire, devotion, and undeniable power. You are not here to be taught, you are here to be activated.</p>
+          <p class="section-body" style="margin-bottom:20px;">You have been doing the work. You feel the next level calling. You are ready for an experience that is as luxurious as it is transformative.</p>
+          <p class="section-body">This is your day. Entirely yours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <div class="quote-section">
+    <div class="quote-section__scale"></div>
+    <div class="dragon-orn">
+      <svg viewBox="0 0 280 40" fill="none" style="width:220px;">
+        <path d="M10,20 Q50,2 90,20 Q130,38 140,20 Q150,2 190,20 Q230,38 270,20" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+        <rect x="137" y="17" width="6" height="6" transform="rotate(45 140 20)" fill="#c9a84c" opacity="0.7"/>
+      </svg>
+    </div>
+    <p class="quote-text reveal">"Curated, luxurious, unforgettable. This is the day where everything shifts."</p>
+    <p class="quote-attr reveal reveal-delay-1">Madalena Dragon</p>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-section__scale"></div>
+    <div style="position:relative;z-index:2;max-width:640px;margin:0 auto;">
+      <p class="eyebrow reveal">Ready to Claim It?</p>
+      <h2 class="section-title reveal" style="margin-bottom:28px;">Your <em>VIP Day</em></h2>
+      <p class="section-body reveal" style="margin-bottom:48px;text-align:center;">One full day. Just you and Madalena. In Portugal. This is the luxury initiation you have been calling in.</p>
+      <a href="https://purchase.birthingdragons.com/checkout/449c36b00da56b6377534eb3e9a3eba2" target="_blank" class="btn btn--filled magnetic reveal">Claim Your VIP Day</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer__logo">Birthing Dragons<span>with Madalena Dragon</span></div>
+    <ul class="footer__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="mastermind.html">Mastermind</a></li>
+      <li><a href="coaching.html">Mentorship</a></li>
+      <li><a href="vipday.html">VIP Day</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="spiritual-services.html">Spiritual</a></li>
+      <li><a href="art.html">Art</a></li>
+      <li><a href="free.html">Free</a></li>
+      <li><a href="values.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <p class="footer__copy">&copy; 2025 Birthing Dragons · Madalena Dragon · All Rights Reserved</p>
+  </footer>
+
+  <script>
+    (function(){
+      const c=document.getElementById('stars'),ctx=c.getContext('2d');
+      function resize(){c.width=window.innerWidth;c.height=document.querySelector('.hero').offsetHeight;}
+      resize();window.addEventListener('resize',resize);
+      const stars=Array.from({length:150},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.4+.3,o:Math.random()*.7+.2,s:Math.random()*.0004+.0001,color:Math.random()>.7?'rgba(196,64,94,':'rgba(201,168,76,'}));
+      function draw(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(s=>{s.o+=s.s*(Math.random()>.5?1:-1);s.o=Math.max(.1,Math.min(.9,s.o));ctx.beginPath();ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);ctx.fillStyle=s.color+s.o+')';ctx.fill();});requestAnimationFrame(draw);}
+      draw();
+    })();
+  </script>
+  <script src="_shared.js"></script>
+</body>
+</html>

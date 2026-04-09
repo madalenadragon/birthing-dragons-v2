@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work With Me | Birthing Dragons</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --black:#060408;--deep:#0a0710;--dark:#0d0b14;--dark2:#12101c;--dark3:#171425;
+      --gold:#c9a84c;--gold-l:#e8d48e;--gold-d:rgba(201,168,76,.16);
+      --crimson:#8B1A3A;--crimson-l:#c4405e;
+      --rose:#b87c82;--rose-d:rgba(184,124,130,.15);
+      --white:#f5f0eb;--cream:#ede5d8;--cream-d:rgba(237,229,216,.5);
+      --serif:'Cormorant Garamond',Georgia,serif;--sans:'Montserrat',sans-serif;
+      --scale-bg:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='48'%3E%3Cellipse cx='28' cy='48' rx='28' ry='18' fill='none' stroke='rgba(201%2C168%2C76%2C0.06)' stroke-width='0.8'/%3E%3Cellipse cx='0' cy='24' rx='28' ry='18' fill='none' stroke='rgba(201%2C168%2C76%2C0.06)' stroke-width='0.8'/%3E%3Cellipse cx='56' cy='24' rx='28' ry='18' fill='none' stroke='rgba(201%2C168%2C76%2C0.06)' stroke-width='0.8'/%3E%3C/svg%3E");
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--black);color:var(--white);font-family:var(--sans);-webkit-font-smoothing:antialiased;cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="22" viewBox="0 0 16 22"><path d="M2 2 L2 18 L6 14 L8.5 20 L11 19 L8.5 13 L13 13 Z" fill="%23c9a84c" stroke="%23604008" stroke-width="1.2" stroke-linejoin="round"/></svg>') 2 2,default;overflow-x:hidden;}
+    .reveal{opacity:0;transform:translateY(36px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);}
+    .reveal.visible{opacity:1;transform:none;}
+    .reveal-delay-1{transition-delay:.12s;}.reveal-delay-2{transition-delay:.24s;}.reveal-delay-3{transition-delay:.36s;}.reveal-delay-4{transition-delay:.48s;}
+
+    /* NAV */
+    #main-nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:center;justify-content:space-between;padding:20px 40px;transition:background .4s,border-color .4s,padding .3s;border-bottom:1px solid transparent;}
+    #main-nav.scrolled{background:rgba(6,4,8,.92);backdrop-filter:blur(20px);border-color:var(--gold-d);padding:14px 40px;}
+    .nav__logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+    .nav__logo img{height:38px;width:auto;}
+    .nav__logo-text{font-family:var(--serif);font-size:10px;letter-spacing:.22em;color:var(--white);text-transform:uppercase;line-height:1.5;}
+    .nav__logo-text span{display:block;font-style:italic;font-size:8px;letter-spacing:.28em;color:var(--gold);}
+    .nav__links{display:flex;align-items:center;gap:16px;list-style:none;flex-wrap:nowrap;}
+    .nav__links a{font-family:var(--sans);font-size:9px;letter-spacing:.14em;color:var(--cream-d);text-decoration:none;text-transform:uppercase;transition:color .2s;white-space:nowrap;}
+    .nav__links a:hover,.nav__links a.active{color:var(--gold);}
+    .nav__cta-btn{display:inline-block;padding:10px 22px;border:1px solid var(--gold);color:var(--gold) !important;font-family:var(--sans);font-size:9px;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;transition:background .25s,color .25s;}
+    .nav__cta-btn:hover{background:var(--gold);color:var(--black) !important;}
+
+    /* SPARKLE */
+    .sparkle-burst{position:fixed;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);}
+    .sparkle-burst span{position:absolute;width:6px;height:6px;border-radius:50%;transform:translate(-50%,-50%);animation:sparkle-fly .65s ease-out forwards;}
+    @keyframes sparkle-fly{0%{opacity:1;transform:translate(0,0) scale(1);}100%{opacity:0;transform:translate(var(--bx),var(--by)) scale(0);}}
+
+    /* BTNS */
+    .btn{display:inline-block;font-family:var(--sans);font-size:10px;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;padding:16px 42px;transition:all .3s;cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="22" viewBox="0 0 16 22"><path d="M2 2 L2 18 L6 14 L8.5 20 L11 19 L8.5 13 L13 13 Z" fill="%23c9a84c" stroke="%23604008" stroke-width="1.2" stroke-linejoin="round"/></svg>') 2 2,default;position:relative;overflow:hidden;}
+    .btn::after{content:'';position:absolute;inset:0;transform:translateX(-101%);transition:transform .35s cubic-bezier(.65,0,.35,1);z-index:-1;}
+    .btn--gold{border:1px solid var(--gold);color:var(--gold);}.btn--gold::after{background:var(--gold);}.btn--gold:hover{color:var(--black);}.btn--gold:hover::after{transform:translateX(0);}
+    .btn--crimson{border:1px solid var(--crimson-l);color:var(--crimson-l);}.btn--crimson::after{background:var(--crimson-l);}.btn--crimson:hover{color:var(--white);}.btn--crimson:hover::after{transform:translateX(0);}
+    .btn--filled{background:var(--gold);color:var(--black);border:1px solid var(--gold);font-weight:600;}.btn--filled:hover{background:transparent;color:var(--gold);}
+    .magnetic{will-change:transform;}
+
+    /* LAYOUT */
+    .section{padding:110px 60px;}
+    .section--dark{background:var(--dark);}
+    .section--dark2{background:var(--dark2);}
+    .container{max-width:1160px;margin:0 auto;}
+    .eyebrow{font-family:var(--sans);font-size:9.5px;letter-spacing:.36em;color:var(--gold);text-transform:uppercase;margin-bottom:20px;}
+    .section-title{font-family:var(--serif);font-weight:600;line-height:1.0;letter-spacing:.03em;color:var(--white);text-transform:uppercase;font-size:clamp(40px,5.5vw,72px);}
+    .section-title em{font-style:italic;background:linear-gradient(135deg,#c9a84c 0%,#f0e0a0 40%,#c9a84c 70%,#9a7830 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-transform:none;font-weight:600;}
+    .section-body{font-family:var(--serif);font-size:18px;line-height:1.95;color:var(--cream);}
+    .divider-line{width:52px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:28px 0;}
+
+    /* DRAGON ORNAMENT */
+    .dragon-orn{display:flex;justify-content:center;margin:50px 0;}
+    .dragon-orn svg{width:220px;opacity:.55;}
+
+    /* WAVE */
+    .wave-divider{line-height:0;overflow:hidden;margin-bottom:-1px;}
+    .wave-divider--flip{transform:scaleY(-1);}
+
+    /* HERO */
+    .hero{min-height:85vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:160px 40px 80px;position:relative;overflow:hidden;background:var(--deep);}
+    canvas#stars{position:absolute;inset:0;pointer-events:none;}
+    .hero__glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(139,26,58,.25) 0%,rgba(201,168,76,.06) 45%,transparent 70%);pointer-events:none;}
+    .hero__scale{position:absolute;inset:0;background-image:var(--scale-bg);opacity:.4;pointer-events:none;}
+    .hero__inner{position:relative;z-index:2;}
+    .hero__title{font-family:var(--serif);font-size:clamp(58px,9vw,118px);font-weight:600;line-height:.95;letter-spacing:.03em;color:var(--white);text-transform:uppercase;margin-bottom:28px;}
+    .hero__title .grad{background:linear-gradient(135deg,#c9a84c 0%,#f0e0a0 35%,#c9a84c 65%,#9a7830 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero__title .italic{display:block;font-style:italic;text-transform:none;font-size:.65em;}
+    .hero__sub{font-family:var(--serif);font-size:clamp(17px,2vw,22px);line-height:1.85;color:var(--cream);max-width:640px;margin:0 auto 52px;}
+    .hero__rule{display:flex;align-items:center;justify-content:center;gap:16px;margin:28px auto;}
+    .hero__rule::before,.hero__rule::after{content:'';display:block;width:80px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);}
+    .hero__rule-diamond{width:7px;height:7px;background:var(--gold);transform:rotate(45deg);}
+
+    /* PATH CARDS */
+    .paths{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--gold-d);}
+    @media(max-width:780px){.paths{grid-template-columns:1fr;}}
+    .path-card{background:var(--dark2);padding:72px 60px;position:relative;overflow:hidden;transition:background .4s;}
+    .path-card:hover{background:var(--dark);}
+    .path-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .4s;pointer-events:none;}
+    .path-card.gold-card::before{background:radial-gradient(ellipse at 20% 80%,rgba(201,168,76,.09),transparent 60%);}
+    .path-card.crimson-card::before{background:radial-gradient(ellipse at 80% 20%,rgba(139,26,58,.12),transparent 60%);}
+    .path-card.rose-card::before{background:radial-gradient(ellipse at 20% 80%,rgba(184,124,130,.09),transparent 60%);}
+    .path-card:hover::before{opacity:1;}
+    .path-card__bg-num{font-family:var(--serif);font-size:130px;font-weight:600;line-height:1;position:absolute;top:8px;right:20px;color:rgba(201,168,76,.05);}
+    .path-card.crimson-card .path-card__bg-num{color:rgba(139,26,58,.08);}
+    .path-card.rose-card .path-card__bg-num{color:rgba(184,124,130,.07);}
+    .path-card__tag{font-family:var(--sans);font-size:9px;letter-spacing:.32em;color:var(--gold);text-transform:uppercase;margin-bottom:18px;}
+    .path-card.crimson-card .path-card__tag{color:var(--crimson-l);}
+    .path-card.rose-card .path-card__tag{color:var(--rose);}
+    .path-card__title{font-family:var(--serif);font-size:clamp(30px,3.5vw,46px);font-weight:600;line-height:1.05;color:var(--white);margin-bottom:20px;text-transform:uppercase;letter-spacing:.03em;}
+    .path-card__title em{font-style:italic;background:linear-gradient(135deg,#c9a84c,#f0e0a0,#c9a84c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-transform:none;}
+    .path-card.crimson-card .path-card__title em{background:linear-gradient(135deg,#c4405e,#e8a0b0,#c4405e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .path-card.rose-card .path-card__title em{background:linear-gradient(135deg,#b87c82,#e8c0c4,#b87c82);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .path-card__body{font-family:var(--serif);font-size:17px;line-height:1.9;color:var(--cream-d);margin-bottom:32px;}
+    .path-card__list{list-style:none;margin-bottom:36px;}
+    .path-card__list li{font-family:var(--serif);font-size:15.5px;color:var(--cream);padding:9px 0;border-bottom:1px solid rgba(201,168,76,.08);display:flex;gap:12px;align-items:flex-start;}
+    .path-card__list li::before{content:'◆';color:var(--gold);font-size:8px;margin-top:6px;flex-shrink:0;}
+    .path-card.crimson-card .path-card__list li::before{color:var(--crimson-l);}
+    .path-card.rose-card .path-card__list li::before{color:var(--rose);}
+    .path-card__price{font-family:var(--serif);font-size:13px;color:var(--cream-d);margin-bottom:28px;letter-spacing:.04em;}
+    .path-card__price strong{color:var(--gold);font-size:22px;}
+
+    /* FULL-WIDTH CARD */
+    .path-card--full{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+    @media(max-width:780px){.path-card--full{grid-template-columns:1fr;gap:40px;}}
+
+    /* PROCESS */
+    .process{display:grid;grid-template-columns:repeat(4,1fr);gap:48px;}
+    @media(max-width:900px){.process{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:540px){.process{grid-template-columns:1fr;}}
+    .proc-step{text-align:center;}
+    .proc-step__num{font-family:var(--serif);font-size:72px;font-weight:600;background:linear-gradient(135deg,#c9a84c,#f0e0a0,#c9a84c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:18px;}
+    .proc-step__title{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--white);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;}
+    .proc-step__body{font-family:var(--serif);font-size:16px;line-height:1.85;color:var(--cream-d);}
+
+    /* QUOTE */
+    .quote-section{padding:100px 60px;background:var(--deep);text-align:center;position:relative;overflow:hidden;}
+    .quote-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(139,26,58,.18) 0%,transparent 70%);pointer-events:none;}
+    .quote-section__scale{position:absolute;inset:0;background-image:var(--scale-bg);opacity:.3;pointer-events:none;}
+    .quote-text{font-family:var(--serif);font-size:clamp(24px,3.5vw,42px);font-weight:600;line-height:1.4;font-style:italic;position:relative;z-index:1;max-width:860px;margin:0 auto 28px;background:linear-gradient(135deg,#c9a84c 0%,#f0e0a0 40%,#c9a84c 75%,#9a7830 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .quote-attr{font-family:var(--sans);font-size:10px;letter-spacing:.28em;color:var(--cream-d);text-transform:uppercase;position:relative;z-index:1;}
+
+    /* CTA SECTION */
+    .cta-section{padding:110px 60px;text-align:center;background:var(--dark);position:relative;overflow:hidden;}
+    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(139,26,58,.2) 0%,rgba(201,168,76,.05) 55%,transparent 75%);pointer-events:none;}
+    .cta-section__scale{position:absolute;inset:0;background-image:var(--scale-bg);opacity:.5;pointer-events:none;}
+
+    /* FOOTER */
+    footer{background:var(--deep);border-top:1px solid var(--gold-d);padding:60px;text-align:center;}
+    .footer__logo{font-family:var(--serif);font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--white);margin-bottom:10px;}
+    .footer__logo span{display:block;font-style:italic;font-size:11px;letter-spacing:.28em;color:var(--gold);margin-top:4px;}
+    .footer__links{display:flex;justify-content:center;gap:32px;list-style:none;margin:28px 0;}
+    .footer__links a{font-size:9px;letter-spacing:.2em;color:var(--cream-d);text-decoration:none;text-transform:uppercase;transition:color .2s;}
+    .footer__links a:hover{color:var(--gold);}
+    .footer__copy{font-size:10px;letter-spacing:.16em;color:rgba(237,229,216,.3);text-transform:uppercase;}
+    @media(max-width:768px){#main-nav{padding:20px 24px;}.nav__links{display:none;}.section{padding:80px 24px;}.hero__inner{padding:0 24px;}footer{padding:60px 24px;}}
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="index.html" class="nav__logo">
+      <img src="https://images.groovetech.io/uwBqZfHO5Z1kNIKup3kW5kGf9K9PI06AHXPawvYmfzM/rs:fit:0:0:0/g:no:0:0/c:0:0/aHR0cHM6Ly9hc3NldHMuZ3Jvb3ZlYXBwcy5jb20vaW1hZ2VzLzA2NWViOTEwLWM5NjEtNGViNC1hM2I4LTRmMDFlYzIyMWI4Yy8xNzQwMTc5ODA4X0lNRzIyNzAyLlBORw.webp" alt="Birthing Dragons">
+      <div class="nav__logo-text">Birthing Dragons<span>Madalena Dragon</span></div>
+    </a>
+    <ul class="nav__links">
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="mastermind.html">Mastermind</a></li>
+      <li><a href="work-with-me.html" class="active">Work With Me</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="art.html">Art</a></li>
+      <li><a href="free.html">Free</a></li>
+      <li><a href="values.html">Values</a></li>
+      <li><a href="https://activationmembershipfunnel.groovesell.com/checkout/954e206cf9a4c6685634674f333cd14c" target="_blank" class="nav__cta-btn">Join ACTIVATION</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <canvas id="stars"></canvas>
+    <div class="hero__glow"></div>
+    <div class="hero__scale"></div>
+    <div class="hero__inner">
+      <p class="eyebrow reveal">Choose Your Path</p>
+      <h1 class="hero__title reveal">
+        <span class="grad">Work</span><br>
+        <span class="italic">With Me</span>
+      </h1>
+      <div class="hero__rule reveal"><div class="hero__rule-diamond"></div></div>
+      <p class="hero__sub reveal">Every woman who finds her way here is ready for something real. Below are the ways we can work together, from intimate community to 1:1 alchemy. Trust what calls to you.</p>
+    </div>
+  </section>
+
+  <!-- WAVE DOWN -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;" fill="#0d0b14"><path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z"/></svg>
+  </div>
+
+  <!-- PATHS GRID -->
+  <section class="section section--dark" style="padding-top:0;">
+    <div class="paths">
+      <!-- ACTIVATION -->
+      <div class="path-card gold-card reveal">
+        <div class="path-card__bg-num">01</div>
+        <p class="path-card__tag">Monthly Membership</p>
+        <h2 class="path-card__title">Dragon<br><em>Activation</em></h2>
+        <p class="path-card__body">The container where the awakening begins. A monthly membership for women who are ready to embody their power, live in alignment, and be held by a community of dragons.</p>
+        <ul class="path-card__list">
+          <li>Monthly live group sessions with Madalena</li>
+          <li>Private community &amp; daily activations</li>
+          <li>Access to growing content library</li>
+          <li>Energy transmissions &amp; guided practices</li>
+        </ul>
+        <p class="path-card__price">From <strong>€97</strong> / month</p>
+        <a href="membership.html" class="btn btn--gold magnetic">Explore Membership</a>
+      </div>
+
+      <!-- MASTERMIND -->
+      <div class="path-card crimson-card reveal reveal-delay-1">
+        <div class="path-card__bg-num">02</div>
+        <p class="path-card__tag">Elite Mastermind</p>
+        <h2 class="path-card__title">You First<br><em>Mastermind</em></h2>
+        <p class="path-card__body">An intimate, high-level container for the woman ready to build her empire from the inside out, where business strategy meets soul reclamation and you are the priority.</p>
+        <ul class="path-card__list">
+          <li>6-month deep-dive container</li>
+          <li>Weekly hot-seat coaching sessions</li>
+          <li>1:1 strategy + integration calls</li>
+          <li>Full business + energy audit</li>
+        </ul>
+        <p class="path-card__price">Investment from <strong>€3,000</strong></p>
+        <a href="mastermind.html" class="btn btn--crimson magnetic">Explore Mastermind</a>
+      </div>
+
+      <!-- COURSES -->
+      <div class="path-card rose-card reveal">
+        <div class="path-card__bg-num">03</div>
+        <p class="path-card__tag">Self-Paced Programs</p>
+        <h2 class="path-card__title">Dragon<br><em>Courses</em></h2>
+        <p class="path-card__body">Potent, standalone programs you move through in your own time and rhythm. Each one a portal into a specific dimension of your becoming, body, business, energy, identity.</p>
+        <ul class="path-card__list">
+          <li>Lifetime access to all materials</li>
+          <li>Audio + video activations included</li>
+          <li>Workbooks &amp; integration guides</li>
+          <li>Community support space</li>
+        </ul>
+        <p class="path-card__price">From <strong>€197</strong> per course</p>
+        <a href="courses.html" class="btn btn--gold magnetic" style="border-color:var(--rose);color:var(--rose);">Explore Courses</a>
+      </div>
+
+      <!-- 1:1 -->
+      <div class="path-card gold-card reveal reveal-delay-1">
+        <div class="path-card__bg-num">04</div>
+        <p class="path-card__tag">Private Work</p>
+        <h2 class="path-card__title">1:1<br><em>Alchemy</em></h2>
+        <p class="path-card__body">The most direct, most potent path. Madalena's full attention on you, your body, your energy, your business, your life. Reserved for women who are truly ready to burn it down and rise.</p>
+        <ul class="path-card__list">
+          <li>Bespoke 3 or 6-month journey</li>
+          <li>Weekly private sessions</li>
+          <li>Voxer access between sessions</li>
+          <li>Completely tailored to your path</li>
+        </ul>
+        <p class="path-card__price">Investment from <strong>€6,000</strong></p>
+        <a href="contact.html" class="btn btn--gold magnetic">Apply Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAVE -->
+  <div class="wave-divider wave-divider--flip" style="background:var(--dark);">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;" fill="#0a0710"><path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z"/></svg>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" style="background:var(--deep);">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:70px;">
+        <p class="eyebrow reveal">The Process</p>
+        <h2 class="section-title reveal">How We <em>Begin</em></h2>
+      </div>
+      <div class="process">
+        <div class="proc-step reveal">
+          <div class="proc-step__num">01</div>
+          <h3 class="proc-step__title">You Feel The Call</h3>
+          <p class="proc-step__body">Something in you already knows. You've been circling this moment. The clarity comes when you stop making yourself wrong for wanting more.</p>
+        </div>
+        <div class="proc-step reveal reveal-delay-1">
+          <div class="proc-step__num">02</div>
+          <h3 class="proc-step__title">You Choose A Path</h3>
+          <p class="proc-step__body">Review the options and let your body lead. Not your logic. The right container will resonate before you've even finished reading.</p>
+        </div>
+        <div class="proc-step reveal reveal-delay-2">
+          <div class="proc-step__num">03</div>
+          <h3 class="proc-step__title">We Connect</h3>
+          <p class="proc-step__body">Reach out or apply below. For membership and courses, you can join directly. For mastermind and 1:1, we speak first to make sure it's aligned.</p>
+        </div>
+        <div class="proc-step reveal reveal-delay-3">
+          <div class="proc-step__num">04</div>
+          <h3 class="proc-step__title">You Begin</h3>
+          <p class="proc-step__body">The moment you commit, the work starts, even before the first call. This path has a way of meeting you exactly where you are and taking you exactly where you need to go.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DRAGON ORNAMENT -->
+  <div class="dragon-orn" style="background:var(--deep);padding:20px 0;">
+    <svg viewBox="0 0 280 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10,20 Q50,2 90,20 Q130,38 140,20 Q150,2 190,20 Q230,38 270,20" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+      <path d="M30,20 Q60,8 90,20 Q120,32 140,20 Q160,8 190,20 Q220,32 250,20" stroke="#c9a84c" stroke-width="0.4" opacity="0.35"/>
+      <rect x="137" y="17" width="6" height="6" transform="rotate(45 140 20)" fill="#c9a84c" opacity="0.8"/>
+      <circle cx="60" cy="20" r="2.5" fill="#c9a84c" opacity="0.4"/>
+      <circle cx="220" cy="20" r="2.5" fill="#c9a84c" opacity="0.4"/>
+      <circle cx="20" cy="20" r="1.5" fill="#c9a84c" opacity="0.25"/>
+      <circle cx="260" cy="20" r="1.5" fill="#c9a84c" opacity="0.25"/>
+    </svg>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote-section">
+    <div class="quote-section__scale"></div>
+    <div class="dragon-orn" style="margin-top:0;margin-bottom:40px;">
+      <svg viewBox="0 0 280 40" fill="none">
+        <path d="M10,20 Q50,2 90,20 Q130,38 140,20 Q150,2 190,20 Q230,38 270,20" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+        <rect x="137" y="17" width="6" height="6" transform="rotate(45 140 20)" fill="#c9a84c" opacity="0.7"/>
+      </svg>
+    </div>
+    <p class="quote-text reveal">"The dragon doesn't wait for permission to breathe fire. Neither should you."</p>
+    <p class="quote-attr reveal reveal-delay-1">Madalena Dragon</p>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-section__scale"></div>
+    <div style="position:relative;z-index:2;max-width:680px;margin:0 auto;">
+      <p class="eyebrow reveal">Ready?</p>
+      <h2 class="section-title reveal" style="margin-bottom:28px;">Not Sure<br>Where To <em>Start?</em></h2>
+      <p class="section-body reveal" style="margin-bottom:48px;text-align:center;">Send me a message. Tell me where you are, what you're craving, what's been holding you back. I'll point you in the right direction, no pressure, no pitch. Just truth.</p>
+      <a href="contact.html" class="btn btn--filled magnetic reveal">Let's Talk</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer__logo">Birthing Dragons<span>with Madalena Dragon</span></div>
+    <ul class="footer__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="work-with-me.html">Work With Me</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="mastermind.html">Mastermind</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="values.html">About</a></li>
+      <li><a href="free.html">Free</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <p class="footer__copy">&copy; 2025 Birthing Dragons · Madalena Dragon · All Rights Reserved</p>
+  </footer>
+
+  <!-- CANVAS STARS -->
+  <script>
+    (function(){
+      const c=document.getElementById('stars'),ctx=c.getContext('2d');
+      function resize(){c.width=window.innerWidth;c.height=document.querySelector('.hero').offsetHeight;}
+      resize();window.addEventListener('resize',resize);
+      const stars=Array.from({length:160},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.4+.3,o:Math.random()*.7+.2,s:Math.random()*.0004+.0001,color:Math.random()>.7?'rgba(196,64,94,':'rgba(201,168,76,'}));
+      function draw(){
+        ctx.clearRect(0,0,c.width,c.height);
+        stars.forEach(s=>{
+          s.o+=s.s*(Math.random()>.5?1:-1);
+          s.o=Math.max(.1,Math.min(.9,s.o));
+          ctx.beginPath();ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);
+          ctx.fillStyle=s.color+s.o+')';ctx.fill();
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+  </script>
+  <script src="_shared.js"></script>
+</body>
+</html>

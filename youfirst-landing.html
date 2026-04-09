@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YOU FIRST Mastermind | Birthing Dragons</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --black:#060408;--deep:#0a0710;--dark:#0d0b14;--dark2:#12101c;
+      --gold:#c9a84c;--gold-l:#e8d48e;--gold-d:rgba(201,168,76,.16);
+      --crimson:#8B1A3A;--crimson-l:#c4405e;
+      --rose:#b87c82;--rose-d:rgba(184,124,130,.15);
+      --violet:#6b4fa0;--violet-l:#a07cd4;
+      --white:#f5f0eb;--cream:#ede5d8;--cream-d:rgba(237,229,216,.5);
+      --serif:'Cormorant Garamond',Georgia,serif;--sans:'Montserrat',sans-serif;
+      --scale-bg:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='48'%3E%3Cellipse cx='28' cy='48' rx='28' ry='18' fill='none' stroke='rgba(201%2C168%2C76%2C0.06)' stroke-width='0.8'/%3E%3Cellipse cx='0' cy='24' rx='28' ry='18' fill='none' stroke='rgba(201%2C168%2C76%2C0.06)' stroke-width='0.8'/%3E%3Cellipse cx='56' cy='24' rx='28\' ry='18' fill='none' stroke='rgba(201%2C168%2C76%2C0.06)' stroke-width='0.8'/%3E%3C/svg%3E");
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--black);color:var(--white);font-family:var(--sans);-webkit-font-smoothing:antialiased;cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="22" viewBox="0 0 16 22"><path d="M2 2 L2 18 L6 14 L8.5 20 L11 19 L8.5 13 L13 13 Z" fill="%23c9a84c" stroke="%23604008" stroke-width="1.2" stroke-linejoin="round"/></svg>') 2 2,default;overflow-x:hidden;}
+    .sparkle-burst{position:fixed;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);}
+    .sparkle-burst span{position:absolute;width:6px;height:6px;border-radius:50%;transform:translate(-50%,-50%);animation:sparkle-fly .65s ease-out forwards;}
+    @keyframes sparkle-fly{0%{opacity:1;transform:translate(0,0) scale(1);}100%{opacity:0;transform:translate(var(--bx),var(--by)) scale(0);}}
+    .reveal{opacity:0;transform:translateY(36px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);}
+    .reveal.visible{opacity:1;transform:none;}
+    .reveal-delay-1{transition-delay:.15s;}.reveal-delay-2{transition-delay:.3s;}.reveal-delay-3{transition-delay:.45s;}
+
+    #main-nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:center;justify-content:space-between;padding:24px 60px;transition:background .4s,border-color .4s,padding .3s;border-bottom:1px solid transparent;}
+    #main-nav.scrolled{background:rgba(6,4,8,.92);backdrop-filter:blur(20px);border-color:var(--gold-d);padding:16px 60px;}
+    .nav__logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+    .nav__logo img{height:40px;width:auto;}
+    .nav__logo-text{font-family:var(--serif);font-size:11px;letter-spacing:.24em;color:var(--white);text-transform:uppercase;line-height:1.5;}
+    .nav__logo-text span{display:block;font-style:italic;font-size:9px;letter-spacing:.3em;color:var(--gold);}
+    .nav__links{display:flex;align-items:center;gap:20px;list-style:none;}
+    .nav__links a{font-family:var(--sans);font-size:10px;letter-spacing:.18em;color:var(--cream-d);text-decoration:none;text-transform:uppercase;transition:color .2s;}
+    .nav__links a:hover,.nav__links a.active{color:var(--gold);}
+    .nav__cta-btn{display:inline-block;padding:10px 22px;border:1px solid var(--gold);color:var(--gold) !important;font-family:var(--sans);font-size:9px;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;transition:background .25s,color .25s;}
+    .nav__cta-btn:hover{background:var(--gold);color:var(--black) !important;}
+
+    .btn{display:inline-block;font-family:var(--sans);font-size:10px;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;padding:18px 48px;transition:all .3s;position:relative;overflow:hidden;cursor:pointer;}
+    .btn::after{content:'';position:absolute;inset:0;transform:translateX(-101%);transition:transform .35s cubic-bezier(.65,0,.35,1);z-index:-1;}
+    .btn--gold{border:1px solid var(--gold);color:var(--gold);}.btn--gold::after{background:var(--gold);}.btn--gold:hover{color:var(--black);}.btn--gold:hover::after{transform:translateX(0);}
+    .btn--filled{background:var(--gold);color:var(--black);border:1px solid var(--gold);font-weight:700;font-size:11px;letter-spacing:.28em;}.btn--filled:hover{background:var(--gold-l);}
+    .btn--rose{border:1px solid var(--rose);color:var(--rose);}.btn--rose::after{background:var(--rose);}.btn--rose:hover{color:var(--white);}.btn--rose:hover::after{transform:translateX(0);}
+    .btn--vip{background:linear-gradient(135deg,var(--gold),var(--gold-l),var(--gold));color:var(--black);border:none;font-weight:700;font-size:11px;letter-spacing:.28em;}
+    .magnetic{will-change:transform;}
+
+    .section{padding:110px 60px;}
+    .container{max-width:1100px;margin:0 auto;}
+    .eyebrow{font-family:var(--sans);font-size:9px;letter-spacing:.42em;color:var(--gold);text-transform:uppercase;margin-bottom:20px;}
+    .section-title{font-family:var(--serif);font-weight:600;line-height:.95;letter-spacing:.02em;color:var(--white);text-transform:uppercase;font-size:clamp(42px,6vw,80px);}
+    .section-title em{font-style:italic;background:linear-gradient(135deg,#c9a84c 0%,#f0e0a0 40%,#c9a84c 70%,#9a7830 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-transform:none;}
+    .section-body{font-family:var(--serif);font-size:18px;line-height:2;color:var(--cream);}
+
+    /* HERO */
+    .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% -10%,rgba(201,168,76,.2),transparent 55%),radial-gradient(ellipse at 15% 75%,rgba(139,26,58,.14),transparent 55%),radial-gradient(ellipse at 85% 40%,rgba(107,79,160,.1),transparent 50%),var(--black);}
+    .hero-scale{position:absolute;inset:0;background:var(--scale-bg);opacity:.45;}
+    canvas#stars{position:absolute;inset:0;width:100%;height:100%;}
+    .hero__inner{position:relative;z-index:2;max-width:1000px;padding:0 40px;}
+    .hero__badge{display:inline-flex;align-items:center;gap:14px;font-family:var(--sans);font-size:8.5px;letter-spacing:.48em;color:var(--gold);text-transform:uppercase;margin-bottom:36px;}
+    .hero__badge::before,.hero__badge::after{content:'';width:36px;height:1px;background:var(--gold);opacity:.5;}
+    .hero__title{font-family:var(--serif);font-size:clamp(36px,9vw,120px);font-weight:700;line-height:.9;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;background:linear-gradient(135deg,#c9a84c 0%,#f0e0a0 30%,#e8c870 50%,#f0e0a0 70%,#c9a84c 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero__you{font-family:var(--serif);font-size:clamp(28px,5vw,64px);font-weight:300;font-style:italic;letter-spacing:.1em;color:var(--gold-l);margin-bottom:36px;display:block;}
+    .hero__tagline{font-family:var(--serif);font-size:clamp(20px,2.8vw,30px);font-style:italic;font-weight:300;line-height:1.55;color:var(--cream);max-width:820px;margin:0 auto 52px;}
+    .hero__tagline strong{font-style:normal;color:var(--white);font-weight:600;}
+
+    /* FOR WHO */
+    .for-who{background:var(--deep);padding:90px 60px;}
+    .for-who__grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1100px;margin:0 auto;}
+    @media(max-width:820px){.for-who__grid{grid-template-columns:1fr;}}
+    .for-who__visual{position:relative;height:500px;overflow:hidden;}
+    .for-who__visual-bg{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,168,76,.14),rgba(107,79,160,.08),var(--dark2));display:flex;align-items:center;justify-content:center;}
+    .for-who__visual-frame{position:absolute;inset:20px;border:1px solid var(--gold-d);}
+    .for-who__visual-text{position:relative;z-index:2;text-align:center;padding:40px;}
+    .who-list{list-style:none;margin-top:28px;}
+    .who-list li{font-family:var(--serif);font-size:16px;color:var(--cream);padding:10px 0;border-bottom:1px solid var(--gold-d);display:flex;gap:14px;align-items:center;}
+    .who-list li::before{content:'◆';color:var(--gold);font-size:7px;flex-shrink:0;}
+
+    /* PILLARS */
+    .pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--gold-d);}
+    @media(max-width:820px){.pillars-grid{grid-template-columns:1fr;}}
+    .pillar-card{background:var(--dark2);padding:64px 48px;position:relative;overflow:hidden;transition:background .4s;}
+    .pillar-card:hover{background:var(--dark);}
+    .pillar-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .5s;}
+    .pillar-card:nth-child(1)::before{background:radial-gradient(ellipse at 20% 80%,rgba(201,168,76,.1),transparent 65%);}
+    .pillar-card:nth-child(2)::before{background:radial-gradient(ellipse at 50% 20%,rgba(139,26,58,.1),transparent 65%);}
+    .pillar-card:nth-child(3)::before{background:radial-gradient(ellipse at 80% 80%,rgba(201,168,76,.1),transparent 65%);}
+    .pillar-card:hover::before{opacity:1;}
+    .pillar-card__num{font-family:var(--serif);font-size:64px;font-weight:700;color:var(--gold);opacity:.15;line-height:1;margin-bottom:16px;}
+    .pillar-card__title{font-family:var(--serif);font-size:clamp(22px,2.5vw,30px);font-weight:600;color:var(--white);text-transform:uppercase;letter-spacing:.04em;line-height:1.15;margin-bottom:18px;}
+    .pillar-card__title em{font-style:italic;background:linear-gradient(135deg,#c9a84c,#f0e0a0,#c9a84c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-transform:none;}
+    .pillar-card__body{font-family:var(--serif);font-size:16px;line-height:1.85;color:var(--cream-d);}
+
+    /* INCLUDES */
+    .includes-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--gold-d);max-width:900px;margin:0 auto;}
+    @media(max-width:700px){.includes-wrap{grid-template-columns:1fr;}}
+    .inc-tile{background:var(--dark2);padding:44px 40px;display:flex;gap:20px;align-items:flex-start;}
+    .inc-tile__icon{font-size:28px;flex-shrink:0;margin-top:4px;}
+    .inc-tile__title{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--white);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;}
+    .inc-tile__body{font-family:var(--serif);font-size:14.5px;line-height:1.7;color:var(--cream-d);}
+
+    /* PRICING */
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--gold-d);}
+    @media(max-width:960px){.pricing-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto;}}
+    .price-card{background:var(--dark2);padding:60px 44px;display:flex;flex-direction:column;position:relative;overflow:hidden;}
+    .price-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .5s;pointer-events:none;}
+    .price-card:nth-child(1)::before{background:radial-gradient(ellipse at 20% 80%,rgba(201,168,76,.09),transparent 65%);}
+    .price-card:nth-child(2)::before{background:radial-gradient(ellipse at 50% 20%,rgba(201,168,76,.14),transparent 65%);}
+    .price-card:nth-child(3)::before{background:radial-gradient(ellipse at 80% 80%,rgba(107,79,160,.1),transparent 65%);}
+    .price-card:hover::before{opacity:1;}
+    .price-card--featured{background:linear-gradient(160deg,var(--dark2),rgba(201,168,76,.07),var(--dark2));}
+    .price-badge{font-family:var(--sans);font-size:8px;letter-spacing:.3em;color:var(--black);background:var(--gold);padding:5px 14px;text-transform:uppercase;display:inline-block;margin-bottom:24px;}
+    .price-card__tag{font-family:var(--sans);font-size:8.5px;letter-spacing:.36em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;}
+    .price-card--vip .price-card__tag{color:var(--violet-l);}
+    .price-card__name{font-family:var(--serif);font-size:clamp(22px,2.5vw,30px);font-weight:600;color:var(--white);text-transform:uppercase;letter-spacing:.04em;line-height:1.1;margin-bottom:28px;}
+    .price-card__amount{font-family:var(--serif);font-size:clamp(44px,5vw,60px);font-weight:700;color:var(--gold);line-height:1;}
+    .price-card--vip .price-card__amount{background:linear-gradient(135deg,#c9a84c,#f0e0a0,#c9a84c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .price-card__period{font-family:var(--sans);font-size:9px;letter-spacing:.22em;color:var(--cream-d);text-transform:uppercase;margin-bottom:8px;}
+    .price-card__note{font-family:var(--serif);font-size:13px;color:var(--cream-d);margin-bottom:32px;padding-bottom:28px;border-bottom:1px solid var(--gold-d);}
+    .price-card__list{list-style:none;margin-bottom:36px;flex-grow:1;}
+    .price-card__list li{font-family:var(--serif);font-size:15px;color:var(--cream);padding:9px 0;border-bottom:1px solid rgba(201,168,76,.06);display:flex;gap:12px;align-items:flex-start;}
+    .price-card__list li::before{content:'◆';color:var(--gold);font-size:7px;margin-top:6px;flex-shrink:0;}
+
+    .quote-section{position:relative;padding:110px 60px;text-align:center;overflow:hidden;}
+    .quote-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(201,168,76,.1),transparent 65%),var(--deep);}
+    .quote-scale{position:absolute;inset:0;background:var(--scale-bg);opacity:.3;}
+    .quote-text{position:relative;z-index:2;font-family:var(--serif);font-size:clamp(26px,4vw,50px);font-weight:300;font-style:italic;line-height:1.35;color:var(--cream);max-width:880px;margin:0 auto 28px;}
+    .quote-attr{position:relative;z-index:2;font-family:var(--sans);font-size:9px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;}
+    .dragon-orn{display:flex;justify-content:center;margin:32px 0;}
+    .cta-section{position:relative;padding:130px 60px;text-align:center;overflow:hidden;}
+    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.18),transparent 60%),var(--dark);}
+    .cta-scale{position:absolute;inset:0;background:var(--scale-bg);opacity:.28;}
+
+    footer{background:var(--deep);border-top:1px solid var(--gold-d);padding:60px;text-align:center;}
+    .footer__logo{font-family:var(--serif);font-size:11px;letter-spacing:.28em;color:var(--white);text-transform:uppercase;margin-bottom:12px;}
+    .footer__logo span{display:block;font-style:italic;font-size:9px;letter-spacing:.3em;color:var(--gold);margin-top:4px;}
+    .footer__tagline{font-family:var(--serif);font-size:14px;font-style:italic;color:var(--cream-d);margin-bottom:32px;}
+    .footer__copy{font-size:10px;color:rgba(237,229,216,.25);letter-spacing:.1em;}
+
+    @media(max-width:768px){
+      #main-nav{padding:18px 24px;}
+      .section,.for-who{padding:80px 24px;}
+      .hero__inner{padding:0 24px;}
+      .pillar-card{padding:48px 28px;}
+      .price-card{padding:44px 28px;}
+      .quote-section,.cta-section{padding:80px 24px;}
+      footer{padding:60px 24px;}
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="main-nav">
+    <a href="index.html" class="nav__logo">
+      <img src="https://images.groovetech.io/uwBqZfHO5Z1kNIKup3kW5kGf9K9PI06AHXPawvYmfzM/rs:fit:0:0:0/g:no:0:0/c:0:0/aHR0cHM6Ly9hc3NldHMuZ3Jvb3ZlYXBwcy5jb20vaW1hZ2VzLzA2NWViOTEwLWM5NjEtNGViNC1hM2I4LTRmMDFlYzIyMWI4Yy8xNzQwMTc5ODA4X0lNRzIyNzAyLlBORw.webp" alt="Birthing Dragons">
+      <div class="nav__logo-text">Birthing Dragons<span>Madalena Dragon</span></div>
+    </a>
+    <ul class="nav__links">
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="mastermind.html">Mastermind</a></li>
+      <li><a href="work-with-me.html">Work With Me</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="art.html">Art</a></li>
+      <li><a href="free.html">Free</a></li>
+      <li><a href="values.html">Values</a></li>
+      <li><a href="https://activationmembershipfunnel.groovesell.com/checkout/954e206cf9a4c6685634674f333cd14c" target="_blank" class="nav__cta-btn">Join ACTIVATION</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-scale"></div>
+    <canvas id="stars"></canvas>
+    <div class="hero__inner">
+      <div class="hero__badge reveal">Yearly Mastermind</div>
+      <h1 class="hero__title reveal">YOU FIRST</h1>
+      <span class="hero__you reveal">with Madalena Dragon</span>
+      <p class="hero__tagline reveal">The Sanctuary for the Multidimensional Woman who feels deeply and <strong>desires it all</strong>.</p>
+      <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;" class="reveal reveal-delay-1">
+        <a href="#join" class="btn btn--filled magnetic">I Am In</a>
+        <a href="#pillars" class="btn btn--gold magnetic">Explore the Container</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR WHO -->
+  <div class="for-who">
+    <div class="for-who__grid">
+      <div class="for-who__visual reveal reveal-delay-1">
+        <div class="for-who__visual-bg">
+          <span style="font-size:100px;opacity:.1;">👑</span>
+        </div>
+        <div class="for-who__visual-frame"></div>
+        <div class="for-who__visual-text">
+          <p style="font-family:var(--sans);font-size:8.5px;letter-spacing:.36em;color:var(--gold);text-transform:uppercase;margin-bottom:20px;">For the woman who knows</p>
+          <p style="font-family:var(--serif);font-size:clamp(20px,2.5vw,28px);font-style:italic;color:var(--cream);line-height:1.5;">she is here for MORE.</p>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="eyebrow">Who This Is For</p>
+        <h2 class="section-title" style="margin-bottom:28px;">The Women Who <em>Choose</em> Themselves</h2>
+        <p class="section-body" style="margin-bottom:24px;">"For the women who know they are here for MORE. To choose themselves, To claim their power, And to transform their lives, relationships and businesses by putting themselves FIRST."</p>
+        <ul class="who-list">
+          <li>Spiritual Women & Leaders</li>
+          <li>Artists & Healers</li>
+          <li>Mothers & Facilitators</li>
+          <li>Visionaries & Entrepreneurs</li>
+          <li>Legacy Creators of the New Earth</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT IT DOES -->
+  <section class="section" style="background:var(--dark);">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:64px;">
+        <p class="eyebrow reveal">The Container</p>
+        <h2 class="section-title reveal">This Mastermind Will <em>Anchor</em> You</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px;text-align:center;" class="reveal">
+        <div style="padding:40px 20px;">
+          <div style="font-size:48px;margin-bottom:20px;">🌹</div>
+          <p style="font-family:var(--serif);font-size:20px;font-weight:600;color:var(--white);text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px;">Self Love</p>
+          <p style="font-family:var(--serif);font-size:15px;line-height:1.8;color:var(--cream-d);">Anchor you into consistent self love and self-leadership</p>
+        </div>
+        <div style="padding:40px 20px;">
+          <div style="font-size:48px;margin-bottom:20px;">👑</div>
+          <p style="font-family:var(--serif);font-size:20px;font-weight:600;color:var(--white);text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px;">Show Up</p>
+          <p style="font-family:var(--serif);font-size:15px;line-height:1.8;color:var(--cream-d);">Teach you how to show up powerfully for yourself, your business, and your dreams</p>
+        </div>
+        <div style="padding:40px 20px;">
+          <div style="font-size:48px;margin-bottom:20px;">🔥</div>
+          <p style="font-family:var(--serif);font-size:20px;font-weight:600;color:var(--white);text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px;">Expand</p>
+          <p style="font-family:var(--serif);font-size:15px;line-height:1.8;color:var(--cream-d);">Expand your capacity to hold the success, impact, and abundance you desire</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE PILLARS -->
+  <div id="pillars"></div>
+  <section class="section" style="background:var(--deep);padding:0;">
+    <div style="text-align:center;padding:80px 60px 60px;">
+      <p class="eyebrow reveal">The Three Pillars</p>
+      <h2 class="section-title reveal">What We <em>Master</em></h2>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card reveal">
+        <div class="pillar-card__num">01</div>
+        <h3 class="pillar-card__title">Self-Leadership <em>Mastery</em></h3>
+        <p class="pillar-card__body">Daily habits, confidence building, navigating resistance. Becoming the woman who chooses herself first, in every area, every day, without apology.</p>
+      </div>
+      <div class="pillar-card reveal reveal-delay-1">
+        <div class="pillar-card__num">02</div>
+        <h3 class="pillar-card__title">Nervous System &<br><em>Embodiment</em></h3>
+        <p class="pillar-card__body">Energy regulation and authentic presence. Expanding your nervous system's capacity to hold more, more love, more abundance, more visibility, more impact.</p>
+      </div>
+      <div class="pillar-card reveal reveal-delay-2">
+        <div class="pillar-card__num">03</div>
+        <h3 class="pillar-card__title">Aligned Action &<br><em>Magnetic Presence</em></h3>
+        <p class="pillar-card__body">Consistent visibility and magnetic energy. Showing up as yourself, fully, unapologetically, and attracting the people, opportunities, and abundance that are aligned with your soul.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INCLUDES -->
+  <section class="section" style="background:var(--dark);">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:60px;">
+        <p class="eyebrow reveal">What You Receive</p>
+        <h2 class="section-title reveal">Inside the <em>Mastermind</em></h2>
+      </div>
+      <div class="includes-wrap">
+        <div class="inc-tile reveal">
+          <div class="inc-tile__icon">🎙️</div>
+          <div>
+            <div class="inc-tile__title">Monthly Live Group Coaching</div>
+            <p class="inc-tile__body">Deep live calls every month with Madalena. Real-time guidance, activation, and group energy.</p>
+          </div>
+        </div>
+        <div class="inc-tile reveal reveal-delay-1">
+          <div class="inc-tile__icon">📚</div>
+          <div>
+            <div class="inc-tile__title">Exclusive Resources & Somatic Practices</div>
+            <p class="inc-tile__body">A living library of tools, activations, and somatic practices designed for your expansion.</p>
+          </div>
+        </div>
+        <div class="inc-tile reveal">
+          <div class="inc-tile__icon">🔥</div>
+          <div>
+            <div class="inc-tile__title">Private Community of Leaders</div>
+            <p class="inc-tile__body">Your soul tribe. Women who are doing the work, holding each other, and normalizing the next level.</p>
+          </div>
+        </div>
+        <div class="inc-tile reveal reveal-delay-1">
+          <div class="inc-tile__icon">💎</div>
+          <div>
+            <div class="inc-tile__title">Personalised Guidance & Mentorship</div>
+            <p class="inc-tile__body">Madalena sees you. Personalised support woven throughout the year for your unique journey.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <div class="quote-section">
+    <div class="quote-scale"></div>
+    <div class="dragon-orn">
+      <svg viewBox="0 0 280 40" fill="none" style="width:220px;">
+        <path d="M10,20 Q50,2 90,20 Q130,38 140,20 Q150,2 190,20 Q230,38 270,20" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+        <rect x="137" y="17" width="6" height="6" transform="rotate(45 140 20)" fill="#c9a84c" opacity="0.7"/>
+      </svg>
+    </div>
+    <p class="quote-text reveal">"The Next Level after ACTIVATION. The Space for you to choose yourself First and create the Life, Relationship and Business that TURNS YOU ON."</p>
+    <p class="quote-attr reveal reveal-delay-1">Madalena Dragon</p>
+  </div>
+
+  <!-- PRICING -->
+  <div id="join"></div>
+  <section class="section" style="background:var(--deep);padding-top:80px;">
+    <div class="container" style="margin-bottom:60px;">
+      <div style="text-align:center;">
+        <p class="eyebrow reveal">Investment</p>
+        <h2 class="section-title reveal">Choose Your <em>Path</em></h2>
+        <p class="section-body reveal" style="max-width:580px;margin:20px auto 0;text-align:center;">All passes include access to the full mastermind container, live monthly calls, community, and Madalena's guidance.</p>
+      </div>
+    </div>
+    <div class="pricing-grid">
+      <!-- MONTHLY -->
+      <div class="price-card reveal">
+        <p class="price-card__tag">Monthly</p>
+        <p class="price-card__name">Monthly Pass</p>
+        <div class="price-card__amount">$555</div>
+        <p class="price-card__period">per month</p>
+        <p class="price-card__note">Flexible monthly access. Commit to the journey month by month.</p>
+        <ul class="price-card__list">
+          <li>Monthly Live Group Coaching Calls</li>
+          <li>Exclusive Resources & Somatic Practices</li>
+          <li>Private Community of Leaders</li>
+          <li>Personalised Guidance & Mentorship</li>
+        </ul>
+        <a href="https://you-first.birthingdragons.com/" target="_blank" class="btn btn--gold magnetic">I Am In</a>
+      </div>
+
+      <!-- YEARLY -->
+      <div class="price-card price-card--featured reveal reveal-delay-1">
+        <span class="price-badge">Most Popular</span>
+        <p class="price-card__tag">Yearly</p>
+        <p class="price-card__name">Yearly Pass</p>
+        <div class="price-card__amount">$6,000</div>
+        <p class="price-card__period">paid in full</p>
+        <p class="price-card__note">Full year. Full transformation. The deepest commitment to yourself.</p>
+        <ul class="price-card__list">
+          <li>Full Year: Monthly Live Group Coaching</li>
+          <li>Full Year: Exclusive Resources & Somatic Practices</li>
+          <li>Full Year: Private Community of Leaders</li>
+          <li>Full Year: Personalised Guidance & Mentorship</li>
+        </ul>
+        <a href="https://you-first.birthingdragons.com/" target="_blank" class="btn btn--filled magnetic">I Am In</a>
+      </div>
+
+      <!-- VIP -->
+      <div class="price-card price-card--vip reveal reveal-delay-2">
+        <span class="price-badge" style="background:linear-gradient(135deg,var(--gold),var(--gold-l));">VIP</span>
+        <p class="price-card__tag">VIP</p>
+        <p class="price-card__name">VIP Pass</p>
+        <div class="price-card__amount">$7,700</div>
+        <p class="price-card__period">paid in full</p>
+        <p class="price-card__note">The highest level of access. For the woman who is ready to go all in.</p>
+        <ul class="price-card__list">
+          <li>Everything in Yearly Pass</li>
+          <li>Hot Seat Calls: personalised coaching in group setting</li>
+          <li>1 Private Session with Madalena</li>
+          <li>Priority access and support</li>
+        </ul>
+        <a href="https://you-first.birthingdragons.com/" target="_blank" class="btn btn--vip magnetic">I Am In: VIP</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-scale"></div>
+    <div style="position:relative;z-index:2;max-width:700px;margin:0 auto;">
+      <p class="eyebrow reveal">The Time Is Now</p>
+      <h2 class="section-title reveal" style="margin-bottom:28px;">You Were Made<br>for <em>More</em></h2>
+      <p class="section-body reveal" style="text-align:center;margin-bottom:48px;">Conscious Leaders, Facilitators and Legacy Creators LEADING THE WAY for massive Impact and Wealth. This is where your story becomes your medicine and your authenticity turns your vulnerability into Art, Power and Impact.</p>
+      <a href="https://you-first.birthingdragons.com/" target="_blank" class="btn btn--filled magnetic reveal">I Am In: YOU FIRST</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer__logo">Birthing Dragons<span>with Madalena Dragon</span></div>
+    <p class="footer__tagline">"Take Action. Expect Miracles."</p>
+    <p class="footer__copy">&copy; 2025 Birthing Dragons · Madalena Dragon · All Rights Reserved</p>
+  </footer>
+
+  <script>
+    (function(){
+      const c=document.getElementById('stars'),ctx=c.getContext('2d');
+      function resize(){c.width=window.innerWidth;c.height=document.querySelector('.hero').offsetHeight;}
+      resize();window.addEventListener('resize',resize);
+      const stars=Array.from({length:180},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.5+.3,o:Math.random()*.7+.2,s:Math.random()*.0004+.0001,color:Math.random()>.65?'rgba(196,64,94,':'rgba(201,168,76,'}));
+      function draw(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(s=>{s.o+=s.s*(Math.random()>.5?1:-1);s.o=Math.max(.1,Math.min(.9,s.o));ctx.beginPath();ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);ctx.fillStyle=s.color+s.o+')';ctx.fill();});requestAnimationFrame(draw);}
+      draw();
+      const nav=document.getElementById('main-nav');
+      window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60));
+      const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.09,rootMargin:'0px 0px -36px 0px'});
+      document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+      document.querySelectorAll('.magnetic').forEach(btn=>{
+        btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect();btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.28}px,${(e.clientY-r.top-r.height/2)*.28}px)`;});
+        btn.addEventListener('mouseleave',()=>btn.style.transform='');
+      });
+      document.addEventListener('click',e=>{const b=document.createElement('div');b.className='sparkle-burst';b.style.cssText=`left:${e.clientX}px;top:${e.clientY}px;`;const colors=['var(--gold)','var(--crimson-l)','var(--rose)','var(--gold-l)'];for(let i=0;i<10;i++){const s=document.createElement('span');const ang=i*36*(Math.PI/180),d=28+Math.random()*36;s.style.cssText=`--bx:${Math.cos(ang)*d}px;--by:${Math.sin(ang)*d}px;background:${colors[i%colors.length]};animation-delay:${Math.random()*.08}s;`;b.appendChild(s);}document.body.appendChild(b);setTimeout(()=>b.remove(),750);});
+    })();
+  </script>
+
+  <script>
+    /* LIGHT MODE TOGGLE */
+    (function(){
+      const themeStyle=document.createElement('style');
+      themeStyle.textContent=`
+        .nav__links a{font-size:11px!important;letter-spacing:.14em!important;}
+        .eyebrow{font-size:11px!important;}
+        .bd-theme-toggle{position:fixed;bottom:28px;right:28px;z-index:9990;width:46px;height:46px;border-radius:50%;border:1px solid var(--gold-d);background:var(--dark2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;transition:all .3s;backdrop-filter:blur(12px);box-shadow:0 4px 24px rgba(0,0,0,.3);}
+        .bd-theme-toggle:hover{border-color:var(--gold);transform:scale(1.12);}
+        [data-theme="light"]{--black:#faf7f2;--deep:#f2ece2;--dark:#e8dfd0;--dark2:#ede7da;--gold:#8a6010;--gold-l:#6a4c0c;--gold-d:rgba(138,96,16,.18);--crimson:#8B1A3A;--crimson-l:#a83050;--rose:#8a5060;--violet:#5a3f90;--violet-l:#8060b4;--white:#1c1528;--cream:#2c2038;--cream-d:rgba(44,32,56,.58);}
+        [data-theme="light"] body{background:#faf7f2;color:#1c1528;}
+        [data-theme="light"] #main-nav.scrolled{background:rgba(250,247,242,.96)!important;border-color:rgba(138,96,16,.2)!important;}
+        [data-theme="light"] .hero,[data-theme="light"] .hero-bg{background:radial-gradient(ellipse at 50% 0%,rgba(138,96,16,.12),transparent 55%),#faf7f2!important;}
+        [data-theme="light"] .hero::before{opacity:.15!important;}
+        [data-theme="light"] canvas#stars{opacity:.35;mix-blend-mode:multiply;}
+        [data-theme="light"] .price-card,[data-theme="light"] .pillar-card,[data-theme="light"] .inc-tile,[data-theme="light"] .inside-item,[data-theme="light"] .mod-item,[data-theme="light"] .pillar{background:#ede7da!important;}
+        [data-theme="light"] .price-card--featured,.price-card--vip{background:linear-gradient(160deg,#ede7da,rgba(138,96,16,.05),#ede7da)!important;}
+        [data-theme="light"] .quote-section::before{background:radial-gradient(ellipse at 50% 50%,rgba(138,96,16,.09),transparent 65%),#f2ece2!important;}
+        [data-theme="light"] .cta-section::before{background:radial-gradient(ellipse at 50% 0%,rgba(138,96,16,.12),transparent 60%),#e8dfd0!important;}
+        [data-theme="light"] .quote-section__scale,[data-theme="light"] .quote-scale,[data-theme="light"] .cta-scale{filter:invert(1);opacity:.08!important;}
+        [data-theme="light"] .welcome-visual,[data-theme="light"] .for-who__visual-bg{background:#e8dfd0!important;}
+        [data-theme="light"] .welcome-visual__glow{background:radial-gradient(ellipse,rgba(138,96,16,.2),transparent 70%)!important;}
+        [data-theme="light"] footer{background:#f2ece2!important;border-color:rgba(138,96,16,.18)!important;}
+        [data-theme="light"] .theme-pill{background:#ede7da!important;border-color:rgba(138,96,16,.2)!important;}
+        [data-theme="light"] .theme-pill__topic{color:#1c1528!important;}
+        [data-theme="light"] .who-list li{border-color:rgba(138,96,16,.15)!important;}
+        [data-theme="light"] .bd-theme-toggle{background:#ede7da;box-shadow:0 4px 24px rgba(0,0,0,.1);}
+      `;
+      document.head.appendChild(themeStyle);
+      const saved=localStorage.getItem('bd-theme')||'dark';
+      if(saved==='light')document.documentElement.setAttribute('data-theme','light');
+      const btn=document.createElement('button');
+      btn.className='bd-theme-toggle';btn.innerHTML=saved==='light'?'🌙':'☀️';
+      document.body.appendChild(btn);
+      btn.addEventListener('click',()=>{
+        const isLight=document.documentElement.getAttribute('data-theme')==='light';
+        if(isLight){document.documentElement.removeAttribute('data-theme');localStorage.setItem('bd-theme','dark');btn.innerHTML='☀️';}
+        else{document.documentElement.setAttribute('data-theme','light');localStorage.setItem('bd-theme','light');btn.innerHTML='🌙';}
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,116 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Light Language Art — Birthing Dragons</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Light Language Art | Birthing Dragons</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --black:#060408;--deep:#0a0710;--dark:#0d0b14;--dark2:#12101c;--dark3:#171425;
+      --gold:#c9a84c;--gold-l:#e8d48e;--gold-d:rgba(201,168,76,.16);
+      --crimson:#8B1A3A;--crimson-l:#c4405e;
+      --rose:#b87c82;--rose-d:rgba(184,124,130,.15);
+      --violet:#6b4fa0;--violet-l:#a07cd4;
+      --white:#f5f0eb;--cream:#ede5d8;--cream-d:rgba(237,229,216,.5);
+      --serif:'Cormorant Garamond',Georgia,serif;--sans:'Montserrat',sans-serif;
+      --scale-bg:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='48'%3E%3Cellipse cx='28' cy='48' rx='28' ry='18' fill='none' stroke='rgba(201%2C168%2C76%2C0.06)' stroke-width='0.8'/%3E%3Cellipse cx='0' cy='24' rx='28' ry='18' fill='none' stroke='rgba(201%2C168%2C76%2C0.06)' stroke-width='0.8'/%3E%3Cellipse cx='56' cy='24' rx='28' ry='18' fill='none' stroke='rgba(201%2C168%2C76%2C0.06)' stroke-width='0.8'/%3E%3C/svg%3E");
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--black);color:var(--white);font-family:var(--sans);-webkit-font-smoothing:antialiased;cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="22" viewBox="0 0 16 22"><path d="M2 2 L2 18 L6 14 L8.5 20 L11 19 L8.5 13 L13 13 Z" fill="%23c9a84c" stroke="%23604008" stroke-width="1.2" stroke-linejoin="round"/></svg>') 2 2,default;overflow-x:hidden;}
+    .sparkle-burst{position:fixed;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);}
+    .sparkle-burst span{position:absolute;width:6px;height:6px;border-radius:50%;transform:translate(-50%,-50%);animation:sparkle-fly .65s ease-out forwards;}
+    @keyframes sparkle-fly{0%{opacity:1;transform:translate(0,0) scale(1);}100%{opacity:0;transform:translate(var(--bx),var(--by)) scale(0);}}
+    .reveal{opacity:0;transform:translateY(36px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);}
+    .reveal.visible{opacity:1;transform:none;}
+    .reveal-delay-1{transition-delay:.12s;}.reveal-delay-2{transition-delay:.24s;}.reveal-delay-3{transition-delay:.36s;}
+
+    #main-nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:center;justify-content:space-between;padding:24px 60px;transition:background .4s,border-color .4s,padding .3s;border-bottom:1px solid transparent;}
+    #main-nav.scrolled{background:rgba(6,4,8,.92);backdrop-filter:blur(20px);border-color:var(--gold-d);padding:14px 60px;}
+    .nav__logo{font-family:var(--serif);font-size:11px;letter-spacing:.24em;color:var(--white);text-decoration:none;text-transform:uppercase;line-height:1.6;display:flex;align-items:center;gap:10px;}
+    .nav__logo img{height:38px;width:auto;}
+    .nav__logo span{display:block;font-style:italic;font-size:9px;letter-spacing:.3em;color:var(--gold);margin-top:2px;} .nav__logo img{height:40px;width:auto;}
+    .nav__links{display:flex;align-items:center;gap:20px;list-style:none;}
+    .nav__links a{font-family:var(--sans);font-size:10px;letter-spacing:.18em;color:var(--cream-d);text-decoration:none;text-transform:uppercase;transition:color .2s;}
+    .nav__links a:hover,.nav__links a.active{color:var(--gold);}
+    .nav__cta-btn{display:inline-block;padding:10px 22px;border:1px solid var(--gold);color:var(--gold) !important;font-family:var(--sans);font-size:9px;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;transition:background .25s,color .25s;}
+    .nav__cta-btn:hover{background:var(--gold);color:var(--black) !important;}
+
+    .btn{display:inline-block;font-family:var(--sans);font-size:10px;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;padding:16px 42px;transition:all .3s;cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="22" viewBox="0 0 16 22"><path d="M2 2 L2 18 L6 14 L8.5 20 L11 19 L8.5 13 L13 13 Z" fill="%23c9a84c" stroke="%23604008" stroke-width="1.2" stroke-linejoin="round"/></svg>') 2 2,default;position:relative;overflow:hidden;}
+    .btn::after{content:'';position:absolute;inset:0;transform:translateX(-101%);transition:transform .35s cubic-bezier(.65,0,.35,1);z-index:-1;}
+    .btn--gold{border:1px solid var(--gold);color:var(--gold);}.btn--gold::after{background:var(--gold);}.btn--gold:hover{color:var(--black);}.btn--gold:hover::after{transform:translateX(0);}
+    .btn--rose{border:1px solid var(--rose);color:var(--rose);}.btn--rose::after{background:var(--rose);}.btn--rose:hover{color:var(--black);}.btn--rose:hover::after{transform:translateX(0);}
+    .btn--filled{background:var(--gold);color:var(--black);border:1px solid var(--gold);font-weight:600;}.btn--filled:hover{background:transparent;color:var(--gold);}
+    .magnetic{will-change:transform;}
+
+    .section{padding:110px 60px;}
+    .container{max-width:1100px;margin:0 auto;}
+    .eyebrow{font-family:var(--sans);font-size:9.5px;letter-spacing:.36em;color:var(--gold);text-transform:uppercase;margin-bottom:20px;}
+    .section-title{font-family:var(--serif);font-weight:600;line-height:1.0;letter-spacing:.03em;color:var(--white);text-transform:uppercase;font-size:clamp(40px,5.5vw,72px);}
+    .section-title em{font-style:italic;background:linear-gradient(135deg,#c9a84c 0%,#f0e0a0 40%,#c9a84c 70%,#9a7830 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-transform:none;font-weight:600;}
+    .section-body{font-family:var(--serif);font-size:18px;line-height:1.95;color:var(--cream);}
+
+    .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.15),transparent 55%),radial-gradient(ellipse at 20% 80%,rgba(107,79,160,.14),transparent 60%),var(--black);}
+    .hero::before{content:'';position:absolute;inset:0;background:var(--scale-bg);opacity:.4;}
+    canvas#stars{position:absolute;inset:0;width:100%;height:100%;}
+    .hero__inner{position:relative;z-index:2;max-width:900px;padding:0 40px;}
+    .hero__eyebrow{font-family:var(--sans);font-size:9.5px;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;margin-bottom:32px;}
+    .hero__title{font-family:var(--serif);font-size:clamp(52px,9vw,118px);font-weight:600;line-height:.9;letter-spacing:.02em;text-transform:uppercase;margin-bottom:36px;}
+    .hero__title em{font-style:italic;background:linear-gradient(135deg,#c9a84c 0%,#f0e0a0 40%,#c9a84c 70%,#9a7830 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-transform:none;}
+    .hero__sub{font-family:var(--serif);font-size:clamp(17px,2vw,22px);line-height:1.7;color:var(--cream-d);max-width:640px;margin:0 auto 52px;}
+
+    /* CATEGORIES */
+    .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--gold-d);}
+    @media(max-width:820px){.cat-grid{grid-template-columns:1fr;}}
+    .cat-card{background:var(--dark2);padding:56px 44px;position:relative;overflow:hidden;transition:background .4s;}
+    .cat-card:hover{background:var(--dark);}
+    .cat-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .5s;}
+    .cat-card:nth-child(1)::before{background:radial-gradient(ellipse at 20% 80%,rgba(201,168,76,.1),transparent 65%);}
+    .cat-card:nth-child(2)::before{background:radial-gradient(ellipse at 80% 20%,rgba(107,79,160,.1),transparent 65%);}
+    .cat-card:nth-child(3)::before{background:radial-gradient(ellipse at 50% 90%,rgba(201,168,76,.1),transparent 65%);}
+    .cat-card:hover::before{opacity:1;}
+    .cat-card__icon{font-size:44px;margin-bottom:24px;}
+    .cat-card__title{font-family:var(--serif);font-size:clamp(22px,2.5vw,32px);font-weight:600;color:var(--white);text-transform:uppercase;letter-spacing:.04em;line-height:1.1;margin-bottom:16px;}
+    .cat-card__title em{font-style:italic;background:linear-gradient(135deg,#c9a84c,#f0e0a0,#c9a84c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-transform:none;}
+    .cat-card__body{font-family:var(--serif);font-size:16px;line-height:1.85;color:var(--cream-d);}
+
+    /* WHAT IT DOES */
+    .what-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--gold-d);}
+    @media(max-width:820px){.what-grid{grid-template-columns:1fr;}}
+    .what-text{background:var(--deep);padding:80px 64px;display:flex;flex-direction:column;justify-content:center;}
+    .what-list{list-style:none;}
+    .what-list li{font-family:var(--serif);font-size:16.5px;color:var(--cream);padding:14px 0;border-bottom:1px solid var(--gold-d);display:flex;gap:14px;align-items:flex-start;}
+    .what-list li::before{content:'◆';color:var(--gold);font-size:7px;margin-top:7px;flex-shrink:0;}
+    .what-visual{background:var(--dark2);position:relative;min-height:480px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+    .what-visual__glow{position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(ellipse,rgba(201,168,76,.14),transparent 70%);animation:gpulse 5s ease-in-out infinite;}
+    @keyframes gpulse{0%,100%{transform:scale(1);}50%{transform:scale(1.2);}}
+    .what-visual__inner{position:relative;z-index:2;text-align:center;padding:40px;}
+
+    /* PROCESS */
+    .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--gold-d);}
+    @media(max-width:800px){.process-steps{grid-template-columns:1fr 1fr;}}
+    @media(max-width:480px){.process-steps{grid-template-columns:1fr;}}
+    .proc-step{background:var(--dark2);padding:44px 32px;text-align:center;}
+    .proc-step__num{font-family:var(--serif);font-size:48px;font-weight:600;color:var(--gold);opacity:.25;line-height:1;margin-bottom:16px;}
+    .proc-step__title{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--white);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;}
+    .proc-step__body{font-family:var(--serif);font-size:14px;line-height:1.7;color:var(--cream-d);}
+
+    /* FORM SECTION */
+    .form-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+    @media(max-width:820px){.form-wrap{grid-template-columns:1fr;}}
+    .form-intro p{margin-bottom:20px;}
+    .custom-form .field{margin-bottom:20px;}
+    .custom-form label{font-family:var(--sans);font-size:9px;letter-spacing:.24em;color:var(--cream-d);text-transform:uppercase;display:block;margin-bottom:8px;}
+    .custom-form input,.custom-form textarea,.custom-form select{width:100%;background:rgba(237,229,216,.04);border:1px solid rgba(201,168,76,.2);color:var(--cream);font-family:var(--serif);font-size:15px;padding:14px 16px;outline:none;transition:border-color .25s;}
+    .custom-form input:focus,.custom-form textarea:focus,.custom-form select:focus{border-color:var(--gold);}
+    .custom-form textarea{resize:vertical;min-height:120px;}
+    .custom-form select option{background:var(--dark2);}
+
+    .quote-section{position:relative;padding:100px 60px;text-align:center;overflow:hidden;}
+    .quote-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(201,168,76,.1),transparent 70%),var(--deep);}
+    .quote-section__scale{position:absolute;inset:0;background:var(--scale-bg);opacity:.3;}
+    .quote-text{position:relative;z-index:2;font-family:var(--serif);font-size:clamp(24px,3.5vw,42px);font-weight:300;font-style:italic;line-height:1.45;color:var(--cream);max-width:820px;margin:0 auto 28px;}
+    .quote-attr{position:relative;z-index:2;font-family:var(--sans);font-size:9.5px;letter-spacing:.36em;color:var(--gold);text-transform:uppercase;}
+    .dragon-orn{display:flex;justify-content:center;margin:32px 0;}
+
+    footer{background:var(--deep);border-top:1px solid var(--gold-d);padding:60px;text-align:center;}
+    .footer__logo{font-family:var(--serif);font-size:11px;letter-spacing:.28em;color:var(--white);text-transform:uppercase;margin-bottom:32px;}
+    .footer__logo span{display:block;font-style:italic;font-size:9px;letter-spacing:.3em;color:var(--gold);margin-top:4px;}
+    .footer__links{display:flex;flex-wrap:wrap;justify-content:center;gap:24px;list-style:none;margin-bottom:32px;}
+    .footer__links a{font-size:9px;letter-spacing:.2em;color:var(--cream-d);text-decoration:none;text-transform:uppercase;transition:color .2s;}
+    .footer__links a:hover{color:var(--gold);}
+    .footer__copy{font-size:10px;color:rgba(237,229,216,.3);letter-spacing:.1em;}
+
+    @media(max-width:768px){
+      #main-nav{padding:20px 24px;}
+      .nav__links{display:none;}
+      .section{padding:80px 24px;}
+      .hero__inner{padding:0 24px;}
+      .what-text{padding:60px 28px;}
+      .quote-section{padding:80px 24px;}
+      footer{padding:60px 24px;}
+      .two-col{grid-template-columns:1fr!important;gap:40px!important;}
+    }
+  </style>
 </head>
 <body>
 
-  <nav class="nav" id="nav">
-    <a href="index.html" class="nav-logo">Birthing Dragons<span>with Madalena Morbey</span></a>
-    <ul class="nav-links" id="nav-links">
+  <nav id="main-nav">
+    <a href="index.html" class="nav__logo">
+      <img src="https://images.groovetech.io/uwBqZfHO5Z1kNIKup3kW5kGf9K9PI06AHXPawvYmfzM/rs:fit:0:0:0/g:no:0:0/c:0:0/aHR0cHM6Ly9hc3NldHMuZ3Jvb3ZlYXBwcy5jb20vaW1hZ2VzLzA2NWViOTEwLWM5NjEtNGViNC1hM2I4LTRmMDFlYzIyMWI4Yy8xNzQwMTc5ODA4X0lNRzIyNzAyLlBORw.webp" alt="Birthing Dragons">
+      <div class="nav__logo-text">Birthing Dragons<span>Madalena Dragon</span></div>
+    </a>
+    <ul class="nav__links">
       <li><a href="membership.html">Membership</a></li>
       <li><a href="mastermind.html">Mastermind</a></li>
-      <li class="nav-dropdown"><a href="#">Work With Me ▾</a>
-        <ul class="nav-dropdown-menu">
-          <li><a href="mentorship.html">1:1 Mentorship</a></li>
-          <li><a href="vip-day.html">VIP Day</a></li>
-          <li><a href="courses.html">Self-Paced Courses</a></li>
-          <li><a href="spiritual-services.html">Spiritual Services</a></li>
-        </ul>
-      </li>
-      <li><a href="art.html">Art</a></li>
+      <li><a href="work-with-me.html">Work With Me</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="art.html" class="active">Art</a></li>
       <li><a href="free.html">Free</a></li>
-      <li><a href="values.html">Our Values</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="membership.html" class="btn btn-gold" style="padding:0.65rem 1.4rem;font-size:0.6rem;">Join Now</a></li>
+      <li><a href="values.html">Values</a></li>
+      <li><a href="https://activationmembershipfunnel.groovesell.com/checkout/954e206cf9a4c6685634674f333cd14c" target="_blank" class="nav__cta-btn">Join ACTIVATION</a></li>
     </ul>
-    <div class="nav-toggle" id="nav-toggle"><span></span><span></span><span></span></div>
   </nav>
 
-  <section class="page-hero" style="padding-top: 8rem;">
-    <div class="container page-hero-content">
-      <span class="eyebrow">Channelled · Encoded · Activated</span>
-      <h1>Light Language<br><em>Codes</em></h1>
-      <div class="divider" style="margin-top: 2rem;"></div>
-      <p style="font-size: 1.15rem; color: var(--cream-dim); max-width: 560px; margin-top: 1.5rem; line-height: 1.8;">Art that isn't meant to be understood. It's meant to be felt. Each piece is a transmission — encoded in colour, form, and frequency.</p>
+  <!-- HERO -->
+  <section class="hero">
+    <canvas id="stars"></canvas>
+    <div class="hero__inner">
+      <p class="hero__eyebrow reveal">Quantum Channelling</p>
+      <h1 class="hero__title reveal">Light Language<br><em>Codes</em></h1>
+      <p class="hero__sub reveal">Quantum and Multidimensional Channeling of Specific Energies and Frequencies, for your Business, your Offerings, your Home, and your Personal Being.</p>
+      <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;" class="reveal reveal-delay-1">
+        <a href="#commission" class="btn btn--gold magnetic">Commission Yours</a>
+        <a href="https://purchase.birthingdragons.com/checkout/2ccfa5f20a772edbaeacc3e95dd7e0e5" target="_blank" class="btn btn--rose magnetic">Your Light Language Codex</a>
+      </div>
     </div>
   </section>
 
-  <section class="section section--dark">
+  <!-- WHAT IS IT -->
+  <section class="section" style="background:var(--deep);">
     <div class="container">
-      <div class="grid-2" style="margin-bottom: 5rem;">
-        <div class="fade-up">
-          <span class="eyebrow">About This Work</span>
-          <h2 class="section-title">Created for the<br><em>soul, not the eye.</em></h2>
-          <div class="divider"></div>
-          <p style="color: var(--cream-dim); margin-bottom: 1.25rem;">Light Language is a form of channelled communication that exists beyond human language. It bypasses the analytical mind and speaks directly to the deeper layers of consciousness — activating, clearing, and remembering.</p>
-          <p style="color: var(--cream-dim); margin-bottom: 1.25rem;">These pieces are not decorative. They are functional. Each one holds a specific frequency and intention that continues to work on you — and the space you place it in — long after you receive it.</p>
-          <p style="color: var(--cream-dim);">Many who receive these pieces report feeling a shift simply by spending time with them. This is not metaphor. This is how the work works.</p>
+      <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+        <div class="reveal">
+          <p class="eyebrow">The Art</p>
+          <h2 class="section-title" style="margin-bottom:28px;">More Than <em>Art</em></h2>
+          <p class="section-body" style="margin-bottom:24px;">Light Language Codes are Quantum and Multidimensional Channelings of Specific Energies and Frequencies. Each piece is a living transmission, encoded with intention, activated through Madalena's unique gifts, and designed to work on your energy field continuously.</p>
+          <p class="section-body">This is not decoration. This is energetic technology channelled through art.</p>
         </div>
-        <div class="fade-up" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-          <div style="background: linear-gradient(135deg, #1A2318, #0D1A0D); height: 200px; border: 1px solid rgba(196,152,90,0.15);"></div>
-          <div style="background: linear-gradient(135deg, #1A1018, #0D0B16); height: 200px; border: 1px solid rgba(196,152,90,0.15);"></div>
-          <div style="background: linear-gradient(135deg, #18130D, #1A0D0D); height: 200px; border: 1px solid rgba(196,152,90,0.15);"></div>
-          <div style="background: linear-gradient(135deg, #0D1518, #0D1820); height: 200px; border: 1px solid rgba(196,152,90,0.15);"></div>
-        </div>
-      </div>
-
-      <!-- Gallery placeholder -->
-      <div class="text-center">
-        <span class="eyebrow">The Collection</span>
-        <h2 class="section-title fade-up" style="margin-bottom: 3rem;">Original &amp; Print Works</h2>
-      </div>
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem;">
-        <div class="card fade-up" style="padding: 0; overflow: hidden;">
-          <div style="background: linear-gradient(135deg, #1A2318, #2A1A08); height: 300px;"></div>
-          <div style="padding: 1.5rem;">
-            <span class="eyebrow" style="font-size: 0.6rem;">Light Language Code</span>
-            <h4 style="font-style: italic; font-size: 1.2rem; color: var(--cream);">Awakening</h4>
-            <a href="contact.html" class="btn-ghost" style="margin-top: 1rem; display: inline-block;">Enquire →</a>
+        <div class="reveal reveal-delay-1" style="position:relative;height:440px;overflow:hidden;border:1px solid var(--gold-d);">
+          <div style="width:100%;height:100%;background:linear-gradient(160deg,var(--dark2),var(--deep),#1a0a2e);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;">
+            <svg viewBox="0 0 120 80" fill="none" style="width:80px;opacity:.6;" xmlns="http://www.w3.org/2000/svg"><path d="M20,60 Q30,10 60,40 Q90,10 100,60" stroke="#c9a84c" stroke-width="1.2" fill="none" opacity=".8"/><path d="M28,55 Q40,18 60,40 Q80,18 92,55" stroke="#c9a84c" stroke-width=".6" fill="none" opacity=".4"/><circle cx="60" cy="40" r="4" fill="none" stroke="#c9a84c" stroke-width="1" opacity=".7"/><rect x="58" y="38" width="4" height="4" transform="rotate(45 60 40)" fill="#c9a84c" opacity=".5"/></svg>
+            <p style="font-family:var(--sans);font-size:9px;letter-spacing:.36em;color:var(--gold);text-transform:uppercase;text-align:center;">✦ Dragon Art Coming Soon ✦</p>
+            <p style="font-family:var(--serif);font-size:13px;font-style:italic;color:var(--cream-d);text-align:center;max-width:220px;line-height:1.7;">Twin Dragons Light Language Code</p>
           </div>
-        </div>
-        <div class="card fade-up" style="padding: 0; overflow: hidden;">
-          <div style="background: linear-gradient(135deg, #1A0D18, #0D0B20); height: 300px;"></div>
-          <div style="padding: 1.5rem;">
-            <span class="eyebrow" style="font-size: 0.6rem;">Light Language Code</span>
-            <h4 style="font-style: italic; font-size: 1.2rem; color: var(--cream);">Sovereignty</h4>
-            <a href="contact.html" class="btn-ghost" style="margin-top: 1rem; display: inline-block;">Enquire →</a>
-          </div>
-        </div>
-        <div class="card fade-up" style="padding: 0; overflow: hidden;">
-          <div style="background: linear-gradient(135deg, #18130A, #201810); height: 300px;"></div>
-          <div style="padding: 1.5rem;">
-            <span class="eyebrow" style="font-size: 0.6rem;">Light Language Code</span>
-            <h4 style="font-style: italic; font-size: 1.2rem; color: var(--cream);">Abundance</h4>
-            <a href="contact.html" class="btn-ghost" style="margin-top: 1rem; display: inline-block;">Enquire →</a>
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,168,76,.15),rgba(107,79,160,.1),var(--dark2));display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(6,4,8,.75),transparent);padding:28px;text-align:center;">
+            <p style="font-family:var(--sans);font-size:9px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;">Quantum · Channelled · Activated</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section section--charcoal">
-    <div class="container text-center">
-      <span class="eyebrow">Bespoke Commissions</span>
-      <h2 class="section-title fade-up">A piece created<br><em>for you.</em></h2>
-      <div class="divider divider--center"></div>
-      <p class="fade-up" style="color: var(--cream-dim); max-width: 520px; margin: 1.5rem auto 2.5rem;">Madalena accepts a limited number of bespoke commissions — pieces channelled specifically for you, your home, your business, or a loved one. Reach out to enquire.</p>
-      <a href="contact.html" class="btn btn-gold fade-up">Request a Commission</a>
+  <!-- CATEGORIES -->
+  <section class="section" style="background:var(--dark);padding:0;">
+    <div style="text-align:center;padding:80px 60px 60px;">
+      <p class="eyebrow reveal">What Can Be Coded</p>
+      <h2 class="section-title reveal">Choose Your <em>Category</em></h2>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card reveal">
+        <div class="cat-card__icon">🏢</div>
+        <h3 class="cat-card__title">Business, Offering,<br><em>Product & Brand</em></h3>
+        <p class="cat-card__body">Channel, weave, birth, anchor, sustain and upgrade the Energetics, Light Grids and Codexes of your business, offerings, products or services. Infuse your brand with living frequency.</p>
+      </div>
+      <div class="cat-card reveal reveal-delay-1">
+        <div class="cat-card__icon">🌟</div>
+        <h3 class="cat-card__title">Personal<br><em>Light Codes</em></h3>
+        <p class="cat-card__body">Connect many different energies from your Unique Soul Codex, assisting you in Embodying more of your Light, Awareness and Multidimensional Gifts. Your personal energetic signature made visible.</p>
+      </div>
+      <div class="cat-card reveal reveal-delay-2">
+        <div class="cat-card__icon">🏠</div>
+        <h3 class="cat-card__title">Home &<br><em>Space Coding</em></h3>
+        <p class="cat-card__body">Assist in anchoring, clearing, shifting and upgrading the Energies and Frequencies in Your Home or Space. Transform your environment into a field of aligned frequency.</p>
+      </div>
     </div>
   </section>
 
-  <footer class="footer">
+  <!-- WHAT IT DOES -->
+  <div class="what-grid">
+    <div class="what-text reveal">
+      <p class="eyebrow" style="margin-bottom:16px;">What It Does</p>
+      <h2 class="section-title" style="margin-bottom:32px;">Living <em>Transmissions</em></h2>
+      <ul class="what-list">
+        <li>Connect energies from your Unique Soul Codex and embody more of your Light</li>
+        <li>Channel, weave and anchor the energetics of your offerings and services</li>
+        <li>Clear and upgrade frequencies for sacred containers and facilitation</li>
+        <li>Anchor, clear, shift and upgrade the energies in your home or space</li>
+        <li>Activate deeper remembrance, knowing and alignment with your mission</li>
+        <li>Create an ongoing energetic upgrade that works continuously in your field</li>
+      </ul>
+    </div>
+    <div class="what-visual">
+      <div class="what-visual__glow"></div>
+      <div class="what-visual__inner">
+        <p style="font-family:var(--serif);font-size:clamp(18px,2.5vw,26px);font-style:italic;color:var(--cream);line-height:1.5;margin-bottom:20px;">"Choose aligned options. Share your intention. Receive and surrender."</p>
+        <p style="font-family:var(--sans);font-size:9px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;">The Process</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEET THE CHANNELER -->
+  <section style="background:var(--deep);padding:0;overflow:hidden;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;background:var(--gold-d);" class="about-split">
+      <div style="background:var(--deep);padding:80px 64px;display:flex;flex-direction:column;justify-content:center;" class="reveal">
+        <p class="eyebrow">The Channeler</p>
+        <h2 class="section-title" style="margin-bottom:28px;">Madalena <em>Dragon</em></h2>
+        <p class="section-body" style="margin-bottom:20px;">Madalena is a Multidimensional Healer, Artist, and Quantum Channeler. Her Light Language Codes are not painted, they are channelled directly from the field, encoded with specific frequencies for each person, space, or creation.</p>
+        <p class="section-body" style="margin-bottom:32px;">Each piece holds a living transmission that works continuously in your field, activating, clearing, and upgrading the energy around your life, business, and soul mission.</p>
+        <a href="#commission" class="btn btn--gold magnetic" style="align-self:flex-start;">Commission Your Piece</a>
+      </div>
+      <div style="position:relative;min-height:560px;overflow:hidden;background:var(--dark2);">
+        <img src="madalena-dragon.jpg" alt="Madalena Dragon" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,7,16,.35),transparent);pointer-events:none;"></div>
+      </div>
+    </div>
+  </section>
+  <style>@media(max-width:820px){.about-split{grid-template-columns:1fr!important;}.about-split>div:first-child{padding:60px 28px!important;}.about-split>div:last-child{min-height:420px!important;}}</style>
+
+  <!-- PROCESS -->
+  <section class="section" style="background:var(--dark);padding:0;">
+    <div style="text-align:center;padding:80px 60px 60px;">
+      <p class="eyebrow reveal">How It Works</p>
+      <h2 class="section-title reveal">The <em>Process</em></h2>
+    </div>
+    <div class="process-steps">
+      <div class="proc-step reveal">
+        <div class="proc-step__num">01</div>
+        <div class="proc-step__title">Choose</div>
+        <p class="proc-step__body">Choose the category aligned with your intention, Business/Brand, Personal, or Home/Space.</p>
+      </div>
+      <div class="proc-step reveal reveal-delay-1">
+        <div class="proc-step__num">02</div>
+        <div class="proc-step__title">Share</div>
+        <p class="proc-step__body">Share your intention, vision, and the details of what you want coded. Describe in as much depth as you feel called to.</p>
+      </div>
+      <div class="proc-step reveal reveal-delay-2">
+        <div class="proc-step__num">03</div>
+        <div class="proc-step__title">Receive</div>
+        <p class="proc-step__body">Open yourself to receive the energetic work through openness and surrender. Madalena channels and creates your piece.</p>
+      </div>
+      <div class="proc-step reveal reveal-delay-3">
+        <div class="proc-step__num">04</div>
+        <div class="proc-step__title">Activate</div>
+        <p class="proc-step__body">Experience the energetic upgrade and timeline shifts as the Light Language Codes activate in your field.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DRAGON ART SHOWCASE -->
+  <section style="background:linear-gradient(160deg,#f7e8c4,#f0d9a8,#e8cc90);padding:80px 60px;text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(201,168,76,.2),transparent 65%);pointer-events:none;"></div>
+    <p style="font-family:var(--sans);font-size:9px;letter-spacing:.42em;color:#9a6010;text-transform:uppercase;margin-bottom:20px;position:relative;z-index:2;" class="reveal">Original Art</p>
+    <h2 style="font-family:var(--serif);font-weight:600;line-height:.95;letter-spacing:.02em;color:#1a0a2e;text-transform:uppercase;font-size:clamp(40px,5.5vw,72px);margin-bottom:52px;position:relative;z-index:2;" class="reveal">The <em style="font-style:italic;background:linear-gradient(135deg,#7a4e08 0%,#c9920c 40%,#9a6010 70%,#5a3204 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Dragon</em></h2>
+    <div class="reveal" style="position:relative;z-index:2;max-width:560px;margin:0 auto;">
+      <div style="width:100%;aspect-ratio:1/1;max-width:400px;margin:0 auto;background:radial-gradient(ellipse at 50% 40%,rgba(201,168,76,.18),rgba(154,80,8,.12),rgba(26,10,46,.6));border:1px solid rgba(201,168,76,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;border-radius:4px;filter:drop-shadow(0 20px 60px rgba(154,110,16,.3));">
+        <svg viewBox="0 0 160 160" fill="none" style="width:120px;opacity:.75;" xmlns="http://www.w3.org/2000/svg"><path d="M80,20 Q110,40 120,80 Q110,120 80,140 Q50,120 40,80 Q50,40 80,20Z" stroke="#c9a84c" stroke-width="1" fill="none" opacity=".5"/><path d="M80,35 Q100,55 108,80 Q100,105 80,125 Q60,105 52,80 Q60,55 80,35Z" stroke="#c9a84c" stroke-width=".7" fill="none" opacity=".35"/><path d="M60,80 Q70,50 80,45 Q90,50 100,80 Q90,110 80,115 Q70,110 60,80Z" stroke="#c9a84c" stroke-width=".5" fill="none" opacity=".25"/><rect x="78" y="78" width="4" height="4" transform="rotate(45 80 80)" fill="#c9a84c" opacity=".8"/><circle cx="80" cy="80" r="2" fill="#c9a84c" opacity=".9"/></svg>
+        <p style="font-family:var(--sans);font-size:9px;letter-spacing:.36em;color:#9a6010;text-transform:uppercase;text-align:center;">✦ Golden Dragon Coming Soon ✦</p>
+      </div>
+    </div>
+    <p style="font-family:var(--serif);font-size:16px;font-style:italic;color:#3e2002;margin-top:32px;position:relative;z-index:2;" class="reveal">"Channel your power. Claim your fire."</p>
+  </section>
+
+  <!-- COMMISSION FORM -->
+  <div id="commission"></div>
+  <section class="section" style="background:var(--deep);">
     <div class="container">
-      <div class="footer-bottom" style="border-top: none; padding-top: 0;">
-        <p>© 2025 Madalena Morbey · Birthing Dragons · All Rights Reserved</p>
-        <p>Take Action. Expect Miracles.</p>
+      <div class="form-wrap">
+        <div class="form-intro reveal">
+          <p class="eyebrow">Commission</p>
+          <h2 class="section-title" style="margin-bottom:28px;">Your Light Language<br><em>Codex</em></h2>
+          <p class="section-body" style="margin-bottom:20px;">Ready to have your Light Language Codes channelled? Fill in the form with your intention and vision. Madalena will review it personally and respond within 48 hours.</p>
+          <p class="section-body" style="margin-bottom:32px;">You can also purchase directly through the link below:</p>
+          <a href="https://purchase.birthingdragons.com/checkout/2ccfa5f20a772edbaeacc3e95dd7e0e5" target="_blank" class="btn btn--gold magnetic">Your Light Language Codex</a>
+        </div>
+        <div class="reveal reveal-delay-1">
+          <form class="custom-form" action="https://birthingdragons.com/contact" method="POST">
+            <div class="field">
+              <label>First Name *</label>
+              <input type="text" name="first_name" required placeholder="Your first name">
+            </div>
+            <div class="field">
+              <label>Email *</label>
+              <input type="email" name="email" required placeholder="your@email.com">
+            </div>
+            <div class="field">
+              <label>What do you want to Code with Light Language? *</label>
+              <select name="coding_type" required>
+                <option value="" disabled selected>Choose a category</option>
+                <option>Business, Offering, Product or Brand Coding</option>
+                <option>Personal Light Codes</option>
+                <option>Home or Space Coding</option>
+                <option>Sacred Container / Facilitation Coding</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>What is your Intention & Vision for this Project? *</label>
+              <textarea name="intention" required placeholder="Please describe in detail what you want coded, your vision, and the energy you want to activate..."></textarea>
+            </div>
+            <div class="field">
+              <label>What is your Budget for this Project? *</label>
+              <input type="text" name="budget" required placeholder="e.g. €500, open to discussing...">
+            </div>
+            <div class="field">
+              <label>Anything else you'd like to share with Madalena?</label>
+              <textarea name="message" placeholder="Optional additional notes..."></textarea>
+            </div>
+            <button type="submit" class="btn btn--filled magnetic" style="width:100%;display:block;text-align:center;">Send My Intention</button>
+          </form>
+        </div>
       </div>
     </div>
+  </section>
+
+  <!-- QUOTE -->
+  <div class="quote-section">
+    <div class="quote-section__scale"></div>
+    <div class="dragon-orn">
+      <svg viewBox="0 0 280 40" fill="none" style="width:220px;">
+        <path d="M10,20 Q50,2 90,20 Q130,38 140,20 Q150,2 190,20 Q230,38 270,20" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+        <rect x="137" y="17" width="6" height="6" transform="rotate(45 140 20)" fill="#c9a84c" opacity="0.7"/>
+      </svg>
+    </div>
+    <p class="quote-text reveal">"Light Language Codes are not just art. They are living transmissions encoded with frequency, designed to activate and upgrade your field continuously."</p>
+    <p class="quote-attr reveal reveal-delay-1">Madalena Dragon</p>
+  </div>
+
+  <footer>
+    <div class="footer__logo">Birthing Dragons<span>with Madalena Dragon</span></div>
+    <ul class="footer__links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="mastermind.html">Mastermind</a></li>
+      <li><a href="coaching.html">Mentorship</a></li>
+      <li><a href="vipday.html">VIP Day</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="spiritual-services.html">Spiritual</a></li>
+      <li><a href="art.html">Art</a></li>
+      <li><a href="free.html">Free</a></li>
+      <li><a href="values.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <p class="footer__copy">&copy; 2025 Birthing Dragons · Madalena Dragon · All Rights Reserved</p>
   </footer>
 
-  <script src="nav.js"></script>
+  <script>
+    (function(){
+      const c=document.getElementById('stars'),ctx=c.getContext('2d');
+      function resize(){c.width=window.innerWidth;c.height=document.querySelector('.hero').offsetHeight;}
+      resize();window.addEventListener('resize',resize);
+      const stars=Array.from({length:150},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.4+.3,o:Math.random()*.7+.2,s:Math.random()*.0004+.0001,color:Math.random()>.6?'rgba(107,79,160,':'rgba(201,168,76,'}));
+      function draw(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(s=>{s.o+=s.s*(Math.random()>.5?1:-1);s.o=Math.max(.1,Math.min(.9,s.o));ctx.beginPath();ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);ctx.fillStyle=s.color+s.o+')';ctx.fill();});requestAnimationFrame(draw);}
+      draw();
+    })();
+  </script>
+  <script src="_shared.js"></script>
 </body>
 </html>
