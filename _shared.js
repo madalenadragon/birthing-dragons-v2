@@ -1,4 +1,73 @@
 /* BIRTHING DRAGONS — SHARED JS — include at bottom of every page */
+
+/* ── GOOGLE ANALYTICS ── */
+/* TODO: Replace G-XXXXXXXXXX with your real Measurement ID from analytics.google.com */
+(function(){
+  var GA_ID = 'G-XXXXXXXXXX'; // ← REPLACE THIS
+  if (GA_ID === 'G-XXXXXXXXXX') return; // remove this line once ID is set
+  var s = document.createElement('script');
+  s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+  document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date()); gtag('config', GA_ID, { anonymize_ip: true });
+  window.gtag = gtag;
+})();
+
+/* ── COOKIE CONSENT ── */
+(function(){
+  if (localStorage.getItem('bd_cookies_ok')) return;
+  const banner = document.createElement('div');
+  banner.id = 'bd-cookie-banner';
+  banner.innerHTML = `
+    <p>We use cookies to improve your experience and understand how our site is used.
+    <a href="privacy.html">Privacy Policy</a></p>
+    <div class="bd-cookie-btns">
+      <button id="bd-cookie-accept">Accept</button>
+      <button id="bd-cookie-decline">Decline</button>
+    </div>`;
+  const style = document.createElement('style');
+  style.textContent = `
+    #bd-cookie-banner {
+      position:fixed;bottom:24px;left:24px;z-index:9999;
+      max-width:420px;background:rgba(6,4,8,.97);border:1px solid rgba(201,168,76,.3);
+      padding:20px 24px;backdrop-filter:blur(20px);
+      font-family:'Montserrat',sans-serif;font-size:11px;line-height:1.7;color:rgba(255,255,255,.7);
+      animation:slideUp .4s ease;
+    }
+    @keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+    #bd-cookie-banner a{color:#c9a84c;text-decoration:none;}
+    #bd-cookie-banner a:hover{text-decoration:underline;}
+    #bd-cookie-banner p{margin:0 0 14px;}
+    .bd-cookie-btns{display:flex;gap:10px;}
+    #bd-cookie-accept{
+      padding:8px 20px;background:#c9a84c;color:#06040a;border:none;
+      font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:.16em;
+      text-transform:uppercase;cursor:pointer;font-weight:600;transition:opacity .2s;
+    }
+    #bd-cookie-accept:hover{opacity:.85;}
+    #bd-cookie-decline{
+      padding:8px 20px;background:none;color:rgba(255,255,255,.5);
+      border:1px solid rgba(255,255,255,.15);font-family:'Montserrat',sans-serif;
+      font-size:10px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:all .2s;
+    }
+    #bd-cookie-decline:hover{color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.3);}
+    @media(max-width:480px){#bd-cookie-banner{left:12px;right:12px;max-width:none;bottom:12px;}}
+  `;
+  document.head.appendChild(style);
+  document.body.appendChild(banner);
+  document.getElementById('bd-cookie-accept').onclick = function() {
+    localStorage.setItem('bd_cookies_ok','1');
+    banner.remove();
+    // enable analytics if GA ID is set
+    if (window.gtag) gtag('consent','update',{analytics_storage:'granted'});
+  };
+  document.getElementById('bd-cookie-decline').onclick = function() {
+    localStorage.setItem('bd_cookies_ok','0');
+    banner.remove();
+  };
+})();
+
 (function(){
 
   /* ── LIGHT MODE CSS INJECTION ── */
