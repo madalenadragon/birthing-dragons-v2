@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | Birthing Dragons</title>
+  <meta name="description" content="Get in touch with Madalena Dragon. Whether you have a question about a program or just want to say hello — reach out.">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Birthing Dragons">
+  <meta property="og:title" content="Contact | Birthing Dragons">
+  <meta property="og:description" content="Get in touch with Madalena Dragon. Whether you have a question about a program or just want to say hello — reach out.">
+  <meta property="og:url" content="https://birthingdragons.com/contact.html">
+  <meta property="og:image" content="https://birthingdragons.com/madalena-dragon.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact | Birthing Dragons">
+  <meta name="twitter:description" content="Get in touch with Madalena Dragon.">
+  <meta name="twitter:image" content="https://birthingdragons.com/madalena-dragon.jpg">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="_base.css">
+  <link rel="stylesheet" href="shared-styles.css">
+  <style>
+    #main-nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:center;justify-content:space-between;padding:24px 60px;transition:background .4s,border-color .4s,padding .3s;border-bottom:1px solid transparent;}
+    #main-nav.scrolled{background:rgba(6,4,8,.92);backdrop-filter:blur(20px);border-color:var(--gold-d);padding:14px 60px;}
+    .nav__logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+    .nav__logo img{height:40px;width:auto;}
+    .nav__logo-text{font-family:var(--serif);font-size:11px;letter-spacing:.24em;color:var(--white);text-transform:uppercase;line-height:1.5;}
+    .nav__logo-text span{display:block;font-style:italic;font-size:9px;letter-spacing:.3em;color:var(--gold);}
+    .nav__links{display:flex;align-items:center;gap:20px;list-style:none;}
+    .nav__links a{font-family:var(--sans);font-size:10px;letter-spacing:.18em;color:var(--cream-d);text-decoration:none;text-transform:uppercase;transition:color .2s;}
+    .nav__links a:hover,.nav__links a.active{color:var(--gold);}
+    .nav__cta-btn{display:inline-block;padding:10px 22px;border:1px solid var(--gold);color:var(--gold) !important;font-family:var(--sans);font-size:9px;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;transition:background .25s,color .25s;}
+    .nav__cta-btn:hover{background:var(--gold);color:var(--black) !important;}
+
+    .contact-hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 40px 80px;
+      background: radial-gradient(ellipse at 50% 30%, rgba(139,26,58,0.15) 0%, rgba(201,168,76,0.08) 30%, transparent 65%),
+                  radial-gradient(ellipse at 20% 80%, rgba(92,48,96,0.12) 0%, transparent 50%),
+                  var(--black);
+      position: relative; overflow: hidden;
+    }
+    .contact-hero canvas { position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0; }
+    .contact-hero__inner { position:relative;z-index:2;max-width:680px;margin:0 auto; }
+
+    .contact-methods { display:flex; flex-direction:column; gap:32px; margin-top:56px; }
+    .contact-method {
+      border: 1px solid var(--gold-d); padding: 40px 48px;
+      transition: border-color .3s, background .3s;
+    }
+    .contact-method:hover { border-color: var(--gold); background: rgba(201,168,76,0.04); }
+    .contact-method__label { font-family:var(--sans);font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:12px; }
+    .contact-method__value { font-family:var(--serif);font-size:clamp(20px,3vw,28px);color:var(--white); }
+    .contact-method__value a { color:var(--white);text-decoration:none;transition:color .2s; }
+    .contact-method__value a:hover { color:var(--gold); }
+    .contact-method__note { font-family:var(--serif);font-size:15px;font-style:italic;color:var(--cream-d);margin-top:8px; }
+
+    .contact-social { display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:48px; }
+    .contact-social a {
+      font-family:var(--sans);font-size:9px;letter-spacing:.28em;text-transform:uppercase;
+      color:var(--cream-d);text-decoration:none;padding:12px 28px;
+      border:1px solid var(--gold-d);transition:all .25s;
+    }
+    .contact-social a:hover { color:var(--gold);border-color:var(--gold); }
+
+    @media(max-width:768px){
+      #main-nav{padding:20px 24px;}
+      #main-nav.scrolled{padding:12px 24px;}
+      .nav__links{display:none;}
+      .contact-method{padding:28px 24px;}
+      .contact-methods{gap:20px;}
+    }
+  </style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="index.html" class="nav__logo">
+    <img src="https://images.groovetech.io/uwBqZfHO5Z1kNIKup3kW5kGf9K9PI06AHXPawvYmfzM/rs:fit:0:0:0/g:no:0:0/c:0:0/aHR0cHM6Ly9hc3NldHMuZ3Jvb3ZlYXBwcy5jb20vaW1hZ2VzLzA2NWViOTEwLWM5NjEtNGViNC1hM2I4LTRmMDFlYzIyMWI4Yy8xNzQwMTc5ODA4X0lNRzIyNzAyLlBORw.webp" alt="Birthing Dragons">
+    <div class="nav__logo-text">Birthing Dragons<span>Madalena Dragon</span></div>
+  </a>
+  <ul class="nav__links">
+    <li><a href="membership.html">Membership</a></li>
+    <li><a href="mastermind.html">Mastermind</a></li>
+    <li><a href="work-with-me.html">Work With Me</a></li>
+    <li><a href="courses.html">Courses</a></li>
+    <li><a href="art.html">Art</a></li>
+    <li><a href="free.html">Free</a></li>
+    <li><a href="values.html">Values</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+    <li><a href="membership.html" class="nav__cta-btn">Join Activation</a></li>
+  </ul>
+</nav>
+
+<section class="contact-hero">
+  <canvas id="stars"></canvas>
+  <div class="contact-hero__inner">
+    <p class="eyebrow reveal">Let's Connect</p>
+    <h1 class="hero__title reveal" style="font-size:clamp(48px,8vw,96px);margin-bottom:20px;">Get in <em>Touch</em></h1>
+    <p class="section-body reveal" style="color:var(--cream-d);max-width:520px;margin:0 auto;">
+      Whether you have a question about a program, want to enquire about working together, or simply feel called to reach out — I'd love to hear from you.
+    </p>
+
+    <div class="contact-methods">
+      <div class="contact-method reveal">
+        <p class="contact-method__label">Email</p>
+        <p class="contact-method__value"><a href="mailto:hello@birthingdragons.com">hello@birthingdragons.com</a></p>
+        <p class="contact-method__note">I read every message personally.</p>
+      </div>
+    </div>
+
+    <div class="contact-social reveal">
+      <a href="https://www.instagram.com/madalena.dragon" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/birthingdragons" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer__logo">Birthing Dragons<span>with Madalena Dragon</span></div>
+  <ul class="footer__links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="work-with-me.html">Work With Me</a></li>
+    <li><a href="membership.html">Membership</a></li>
+    <li><a href="mastermind.html">Mastermind</a></li>
+    <li><a href="courses.html">Courses</a></li>
+    <li><a href="values.html">About</a></li>
+    <li><a href="free.html">Free</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="privacy.html">Privacy Policy</a></li>
+    <li><a href="terms.html">Terms</a></li>
+  </ul>
+  <p class="footer__copy">&copy; 2025 Birthing Dragons · Madalena Dragon · All Rights Reserved</p>
+</footer>
+
+<script src="_shared.js"></script>
+</body>
+</html>
