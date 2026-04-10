@@ -109,6 +109,14 @@
     .footer__links a:hover{color:var(--gold);}
     .footer__copy{font-size:10px;letter-spacing:.16em;color:rgba(237,229,216,.3);text-transform:uppercase;}
     @media(max-width:768px){#main-nav{padding:20px 24px;}.nav__links{display:none;}.section{padding:80px 24px;}footer{padding:60px 24px;}}
+    .free-optin-form { display:flex; flex-direction:column; gap:12px; margin-top:4px; }
+    .free-optin-form input[type="text"],
+    .free-optin-form input[type="email"] { width:100%; box-sizing:border-box; background:rgba(255,255,255,0.05); border:1px solid rgba(196,64,94,0.4); color:var(--white); font-family:var(--serif); font-size:16px; padding:14px 18px; outline:none; transition:border-color .2s; -webkit-appearance:none; }
+    .free-optin-form input::placeholder { color:rgba(245,240,235,0.35); }
+    .free-optin-form input:focus { border-color:var(--crimson-l); }
+    .free-optin-form button[type="submit"] { width:100%; font-family:var(--sans); font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:var(--white); background:var(--crimson-l); border:1px solid var(--crimson-l); padding:16px; cursor:pointer; transition:background .25s,color .25s; margin-top:4px; }
+    .free-optin-form button[type="submit"]:hover { background:transparent; color:var(--crimson-l); }
+    .free-optin-note { font-family:var(--sans); font-size:9px; letter-spacing:.12em; color:rgba(245,240,235,0.3); text-align:center; margin:0; }
   </style>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -181,20 +189,28 @@
         <div class="free-card__visual">
           <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;text-align:center;">
             <svg viewBox="0 0 80 60" fill="none" style="width:52px;opacity:.65;" xmlns="http://www.w3.org/2000/svg"><path d="M10,50 Q20,10 40,30 Q60,10 70,50" stroke="#c4405e" stroke-width="1.2" fill="none"/><rect x="38" y="28" width="4" height="4" transform="rotate(45 40 30)" fill="#c4405e" opacity=".7"/></svg>
-            <p style="font-family:var(--sans);font-size:8.5px;letter-spacing:.32em;color:var(--crimson-l);text-transform:uppercase;">✦ Coming Soon ✦</p>
+            <svg viewBox="0 0 80 60" fill="none" style="width:52px;opacity:.65;" xmlns="http://www.w3.org/2000/svg"><path d="M10,50 Q20,10 40,30 Q60,10 70,50" stroke="#c4405e" stroke-width="1.2" fill="none"/><rect x="38" y="28" width="4" height="4" transform="rotate(45 40 30)" fill="#c4405e" opacity=".7"/></svg>
           </div>
         </div>
         <div>
           <div class="free-card__badge">Free Masterclass</div>
           <p class="free-card__tag">Video Training</p>
           <h2 class="free-card__title">From Spiritual<br>to <em>Human</em></h2>
-          <p class="free-card__body">A free masterclass delivered straight to your inbox. Enter your name and email and the link will be sent to you immediately.</p>
-          <ul class="free-card__list">
-            <li>Delivered instantly to your email</li>
-            <li>Watch at your own pace</li>
-            <li>No purchase required</li>
-          </ul>
-          <a href="contact.html" class="btn btn--crimson magnetic">Send Me The Masterclass</a>
+          <p class="free-card__body">Enter your name and email and the masterclass link will be sent to you immediately. Free, no purchase required.</p>
+          <form action="https://v1.gdapis.com/api/groovemail/saverawuserdetails" method="post" class="free-optin-form">
+            <input type="hidden" name="formid" value="6512fba0ccce387aef465583">
+            <input type="hidden" name="ip_address" value="false">
+            <input type="hidden" name="appUrl" value="https://app.groove.cm">
+            <input type="hidden" name="form_submit_type" value="raw_html">
+            <input type="hidden" name="random_hidden_key_bnVKF7qP" value="">
+            <input type="text" name="first_name" placeholder="First Name" required>
+            <input type="text" name="last_name" placeholder="Last Name" required>
+            <input type="email" name="email" placeholder="Email Address" required pattern="[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(.[a-zA-Z]{2,4})">
+            <button type="submit">Send Me The Masterclass</button>
+            <p class="free-optin-note">No spam, ever. Unsubscribe at any time.</p>
+          </form>
+          <link rel="stylesheet" type="text/css" href="https://app.groove.cm/groovemail/embed/app.css">
+          <script src="https://app.groove.cm/groovemail/embed/countryCodeInput.js" formId="6512fba0ccce387aef465583"></script>
         </div>
       </div>
 
