@@ -31,6 +31,12 @@
     .t-card__meta { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
     .t-card__read { font-family: var(--sans); font-size: 8px; letter-spacing: .22em; color: var(--gold); text-transform: uppercase; }
     .t-card__time { font-family: var(--sans); font-size: 8px; letter-spacing: .15em; color: rgba(201,168,76,.4); text-transform: uppercase; }
+
+    .t-filters { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; padding:0 40px 64px; max-width:1100px; margin:0 auto; }
+    .t-filter { font-family:var(--sans); font-size:8px; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); background:transparent; border:1px solid rgba(201,168,76,0.2); padding:10px 20px; cursor:pointer; transition:background .2s,border-color .2s,color .2s; }
+    .t-filter:hover,.t-filter.active { background:rgba(201,168,76,0.1); border-color:var(--gold); }
+    .t-card.hidden { display:none; }
+
     @media(max-width:768px) { .t-header { padding: 120px 24px 60px; } .t-grid { padding: 0 24px 80px; grid-template-columns: 1fr; } .t-card { padding: 36px 28px; } }
   </style>
 </head>
@@ -43,6 +49,17 @@
     <p>Writings, activations and reflections for the highly sensitive soul who can feel the magnitude of what she is here to do, and is done waiting for permission to do it.</p>
   </div>
   <div class="t-divider"></div>
+
+  <div class="t-filters">
+    <button class="t-filter active" data-filter="all">All</button>
+    <button class="t-filter" data-filter="Embodiment">Embodiment</button>
+    <button class="t-filter" data-filter="Spirituality">Spirituality</button>
+    <button class="t-filter" data-filter="Business">Business</button>
+    <button class="t-filter" data-filter="Activation">Activation</button>
+    <button class="t-filter" data-filter="Money">Money</button>
+    <button class="t-filter" data-filter="Leadership">Leadership</button>
+    <button class="t-filter" data-filter="Purpose">Purpose</button>
+  </div>
 
   <div class="t-grid">
 
@@ -270,6 +287,26 @@
   </div>
 
   <footer id="main-footer"></footer>
+
+  <script>
+    const filters = document.querySelectorAll('.t-filter');
+    const cards = document.querySelectorAll('.t-card');
+    filters.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filters.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        cards.forEach(card => {
+          const cat = card.querySelector('.t-card__cat').textContent;
+          if (f === 'all' || cat.includes(f)) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+  </script>
   <script src="_shared.js"></script>
 </body>
 </html>
