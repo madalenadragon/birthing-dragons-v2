@@ -310,30 +310,52 @@
   </ul>
 </nav>
 
-<!-- EPIC DRAGON SCROLL SEQUENCE -->
-<div id="dragon-scroll-sequence">
-  <div id="dragon-scroll-sticky">
-    <div class="dsh-fire"></div>
-    <canvas id="dragon-canvas"></canvas>
-
-    <div id="dragon-text-layer">
-      <p id="dsh-eyebrow">Madalena Dragon</p>
-      <span id="dsh-line1">Birthing</span>
-      <span id="dsh-line2">Dragons</span>
-      <p id="dsh-tagline">Take Action. Expect Miracles.</p>
-      <p id="dsh-body">For the highly sensitive, pure-hearted soul who can feel the magnitude of what she is here to do, and is done waiting for permission to do it.</p>
-      <div id="dsh-actions">
-        <a href="membership.html" class="btn btn--filled">Join ACTIVATION</a>
-        <a href="mastermind.html" class="btn btn--gold">YOU FIRST Mastermind</a>
-      </div>
+<!-- HERO -->
+<section class="hero">
+  <canvas id="star-canvas"></canvas>
+  <canvas id="hero-3d"></canvas>
+  <div class="hero__fire"></div>
+  <div class="hero__content">
+    <div class="hero__brand-logo" style="margin-bottom:20px;opacity:0;animation:fadeUp 1s 0.2s forwards;">
+      <img src="https://images.groovetech.io/uwBqZfHO5Z1kNIKup3kW5kGf9K9PI06AHXPawvYmfzM/rs:fit:0:0:0/g:no:0:0/c:0:0/aHR0cHM6Ly9hc3NldHMuZ3Jvb3ZlYXBwcy5jb20vaW1hZ2VzLzA2NWViOTEwLWM5NjEtNGViNC1hM2I4LTRmMDFlYzIyMWI4Yy8xNzQwMTc5ODA4X0lNRzIyNzAyLlBORw.webp"
+           alt="Madalena Dragon"
+           style="width:160px;height:auto;filter:drop-shadow(0 0 18px rgba(201,168,76,0.35));">
     </div>
-
-    <div id="dsh-scroll-hint">
-      <span class="hero__scroll-label">Scroll</span>
-      <div class="hero__scroll-line"></div>
+    <h1 class="hero__title">
+      <span class="line1">Birthing</span>
+      <span class="line2">Dragons</span>
+    </h1>
+    <div class="hero__orn dragon-ornament">
+      <svg viewBox="0 0 360 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="56" y1="25" x2="148" y2="25" stroke="rgba(201,168,76,0.3)" stroke-width="0.5"/>
+        <path d="M148,25 Q128,8 96,14 Q74,18 56,8" stroke="rgba(201,168,76,0.45)" stroke-width="0.9" fill="none"/>
+        <path d="M148,25 Q128,38 96,34 Q74,31 56,40" stroke="rgba(139,26,58,0.35)" stroke-width="0.7" fill="none"/>
+        <circle cx="56" cy="8" r="1.5" fill="rgba(201,168,76,0.5)"/>
+        <circle cx="56" cy="40" r="1.5" fill="rgba(139,26,58,0.5)"/>
+        <line x1="304" y1="25" x2="212" y2="25" stroke="rgba(201,168,76,0.3)" stroke-width="0.5"/>
+        <path d="M212,25 Q232,8 264,14 Q286,18 304,8" stroke="rgba(201,168,76,0.45)" stroke-width="0.9" fill="none"/>
+        <path d="M212,25 Q232,38 264,34 Q286,31 304,40" stroke="rgba(139,26,58,0.35)" stroke-width="0.7" fill="none"/>
+        <circle cx="304" cy="8" r="1.5" fill="rgba(201,168,76,0.5)"/>
+        <circle cx="304" cy="40" r="1.5" fill="rgba(139,26,58,0.5)"/>
+        <rect x="177" y="22" width="6" height="6" fill="rgba(201,168,76,0.85)" transform="rotate(45 180 25)"/>
+        <circle cx="162" cy="25" r="2" fill="rgba(201,168,76,0.4)"/>
+        <circle cx="198" cy="25" r="2" fill="rgba(201,168,76,0.4)"/>
+        <circle cx="148" cy="25" r="2.5" fill="rgba(201,168,76,0.5)"/>
+        <circle cx="212" cy="25" r="2.5" fill="rgba(201,168,76,0.5)"/>
+      </svg>
+    </div>
+    <p class="hero__tagline">Take Action. Expect Miracles.</p>
+    <p class="hero__body">For the highly sensitive, pure-hearted soul who can feel the magnitude of what she is here to do, and is done waiting for permission to do it.</p>
+    <div class="hero__actions">
+      <a href="membership.html" class="btn btn--filled magnetic">Join ACTIVATION</a>
+      <a href="mastermind.html" class="btn btn--gold magnetic">YOU FIRST Mastermind</a>
     </div>
   </div>
-</div>
+  <div class="hero__scroll">
+    <span class="hero__scroll-label">Scroll</span>
+    <div class="hero__scroll-line"></div>
+  </div>
+</section>
 
 <!-- MARQUEE -->
 <div class="marquee-wrap">
@@ -875,7 +897,6 @@ document.querySelectorAll('.magnetic').forEach(btn=>{
   });
 });
 </script>
-<script src="dragon-scroll.js"></script>
 <script src="_shared.js"></script>
 </body>
 </html>
