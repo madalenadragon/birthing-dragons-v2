@@ -51,6 +51,24 @@
     html { scroll-behavior: smooth; }
     body { background: var(--black); color: var(--white); font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
+    /* ── DRAGON SCROLL SEQUENCE ── */
+    #dragon-scroll-sequence { height: 500vh; position: relative; }
+    #dragon-scroll-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; background: var(--black); }
+    #dragon-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+    #dragon-text-layer { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 2; pointer-events: none; text-align: center; padding: 0 clamp(24px,5vw,120px); gap: 0; }
+    #dsh-eyebrow { font-family: var(--sans); font-size: 9px; letter-spacing: .5em; color: var(--gold); text-transform: uppercase; margin-bottom: 24px; opacity: 0; }
+    #dsh-line1 { display: block; font-family: var(--serif); font-size: clamp(72px,13vw,148px); font-weight: 600; line-height: 0.88; letter-spacing: .04em; text-transform: uppercase; background: linear-gradient(135deg,#c9a84c 0%,#f0e0a0 35%,#e8c870 55%,#c9a84c 75%,#9a7830 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0; }
+    #dsh-line2 { display: block; font-family: var(--serif); font-size: clamp(58px,10.5vw,122px); font-weight: 500; line-height: 0.88; letter-spacing: .08em; text-transform: uppercase; font-style: italic; background: linear-gradient(135deg,#c9a84c 0%,#f0e0a0 35%,#c9a84c 60%,#9a7830 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0; margin-bottom: 28px; }
+    #dsh-tagline { font-family: var(--serif); font-size: clamp(14px,1.8vw,20px); font-style: italic; color: var(--rose); letter-spacing: .16em; margin-bottom: 18px; opacity: 0; }
+    #dsh-body { font-family: var(--serif); font-size: clamp(15px,1.6vw,19px); color: var(--cream); line-height: 1.85; max-width: 560px; margin: 0 auto 40px; font-weight: 300; opacity: 0; }
+    #dsh-actions { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; pointer-events: all; opacity: 0; }
+    #dsh-scroll-hint { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 3; }
+    #dsh-scroll-hint .hero__scroll-label { font-family: var(--sans); font-size: 8px; letter-spacing: .35em; color: rgba(201,168,76,0.6); text-transform: uppercase; }
+    #dsh-scroll-hint .hero__scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scroll-draw 2.2s ease-in-out infinite; }
+    /* fire glow behind dragon */
+    .dsh-fire { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 55%, rgba(139,26,58,0.22) 0%, rgba(201,168,76,0.1) 28%, rgba(92,48,96,0.07) 52%, transparent 72%); animation: fire-pulse 8s ease-in-out infinite; z-index: 0; }
+    @media(max-width:768px) { #dsh-line1{font-size:clamp(56px,15vw,88px)} #dsh-line2{font-size:clamp(46px,12vw,72px)} #dragon-text-layer{padding:0 24px} }
+
     /* ── REVEAL ── */
     .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(0.22,1,0.36,1), transform 1s cubic-bezier(0.22,1,0.36,1); }
     .reveal.visible { opacity: 1; transform: none; }
@@ -292,52 +310,30 @@
   </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <canvas id="star-canvas"></canvas>
-  <canvas id="hero-3d"></canvas>
-  <div class="hero__fire"></div>
-  <div class="hero__content">
-    <div class="hero__brand-logo" style="margin-bottom:20px;opacity:0;animation:fadeUp 1s 0.2s forwards;">
-      <img src="https://images.groovetech.io/uwBqZfHO5Z1kNIKup3kW5kGf9K9PI06AHXPawvYmfzM/rs:fit:0:0:0/g:no:0:0/c:0:0/aHR0cHM6Ly9hc3NldHMuZ3Jvb3ZlYXBwcy5jb20vaW1hZ2VzLzA2NWViOTEwLWM5NjEtNGViNC1hM2I4LTRmMDFlYzIyMWI4Yy8xNzQwMTc5ODA4X0lNRzIyNzAyLlBORw.webp"
-           alt="Madalena Dragon"
-           style="width:160px;height:auto;filter:drop-shadow(0 0 18px rgba(201,168,76,0.35));">
+<!-- EPIC DRAGON SCROLL SEQUENCE -->
+<div id="dragon-scroll-sequence">
+  <div id="dragon-scroll-sticky">
+    <div class="dsh-fire"></div>
+    <canvas id="dragon-canvas"></canvas>
+
+    <div id="dragon-text-layer">
+      <p id="dsh-eyebrow">Madalena Dragon</p>
+      <span id="dsh-line1">Birthing</span>
+      <span id="dsh-line2">Dragons</span>
+      <p id="dsh-tagline">Take Action. Expect Miracles.</p>
+      <p id="dsh-body">For the highly sensitive, pure-hearted soul who can feel the magnitude of what she is here to do, and is done waiting for permission to do it.</p>
+      <div id="dsh-actions">
+        <a href="membership.html" class="btn btn--filled">Join ACTIVATION</a>
+        <a href="mastermind.html" class="btn btn--gold">YOU FIRST Mastermind</a>
+      </div>
     </div>
-    <h1 class="hero__title">
-      <span class="line1">Birthing</span>
-      <span class="line2">Dragons</span>
-    </h1>
-    <div class="hero__orn dragon-ornament">
-      <svg viewBox="0 0 360 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="56" y1="25" x2="148" y2="25" stroke="rgba(201,168,76,0.3)" stroke-width="0.5"/>
-        <path d="M148,25 Q128,8 96,14 Q74,18 56,8" stroke="rgba(201,168,76,0.45)" stroke-width="0.9" fill="none"/>
-        <path d="M148,25 Q128,38 96,34 Q74,31 56,40" stroke="rgba(139,26,58,0.35)" stroke-width="0.7" fill="none"/>
-        <circle cx="56" cy="8" r="1.5" fill="rgba(201,168,76,0.5)"/>
-        <circle cx="56" cy="40" r="1.5" fill="rgba(139,26,58,0.5)"/>
-        <line x1="304" y1="25" x2="212" y2="25" stroke="rgba(201,168,76,0.3)" stroke-width="0.5"/>
-        <path d="M212,25 Q232,8 264,14 Q286,18 304,8" stroke="rgba(201,168,76,0.45)" stroke-width="0.9" fill="none"/>
-        <path d="M212,25 Q232,38 264,34 Q286,31 304,40" stroke="rgba(139,26,58,0.35)" stroke-width="0.7" fill="none"/>
-        <circle cx="304" cy="8" r="1.5" fill="rgba(201,168,76,0.5)"/>
-        <circle cx="304" cy="40" r="1.5" fill="rgba(139,26,58,0.5)"/>
-        <rect x="177" y="22" width="6" height="6" fill="rgba(201,168,76,0.85)" transform="rotate(45 180 25)"/>
-        <circle cx="162" cy="25" r="2" fill="rgba(201,168,76,0.4)"/>
-        <circle cx="198" cy="25" r="2" fill="rgba(201,168,76,0.4)"/>
-        <circle cx="148" cy="25" r="2.5" fill="rgba(201,168,76,0.5)"/>
-        <circle cx="212" cy="25" r="2.5" fill="rgba(201,168,76,0.5)"/>
-      </svg>
-    </div>
-    <p class="hero__tagline">Take Action. Expect Miracles.</p>
-    <p class="hero__body">For the highly sensitive, pure-hearted soul who can feel the magnitude of what she is here to do, and is done waiting for permission to do it.</p>
-    <div class="hero__actions">
-      <a href="membership.html" class="btn btn--filled magnetic">Join ACTIVATION</a>
-      <a href="mastermind.html" class="btn btn--gold magnetic">YOU FIRST Mastermind</a>
+
+    <div id="dsh-scroll-hint">
+      <span class="hero__scroll-label">Scroll</span>
+      <div class="hero__scroll-line"></div>
     </div>
   </div>
-  <div class="hero__scroll">
-    <span class="hero__scroll-label">Scroll</span>
-    <div class="hero__scroll-line"></div>
-  </div>
-</section>
+</div>
 
 <!-- MARQUEE -->
 <div class="marquee-wrap">
@@ -879,6 +875,7 @@ document.querySelectorAll('.magnetic').forEach(btn=>{
   });
 });
 </script>
+<script src="dragon-scroll.js"></script>
 <script src="_shared.js"></script>
 </body>
 </html>
