@@ -458,6 +458,30 @@
     });
   });
 
+  /* ── CUSTOM CURSOR ── */
+  (function(){
+    if(window.innerWidth <= 768) return;
+    if(document.getElementById('cursor-dot')) return; // already exists
+    const dot = document.createElement('div'); dot.id = 'cursor-dot';
+    const ring = document.createElement('div'); ring.id = 'cursor-ring';
+    document.body.appendChild(dot);
+    document.body.appendChild(ring);
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',e=>{
+      mx=e.clientX; my=e.clientY;
+      dot.style.left=mx+'px'; dot.style.top=my+'px';
+    });
+    (function animateRing(){
+      rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+      ring.style.left=rx+'px'; ring.style.top=ry+'px';
+      requestAnimationFrame(animateRing);
+    })();
+    document.querySelectorAll('a,button,.t-card,.t-filter').forEach(el=>{
+      el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
+    });
+  })();
+
   /* ── NAV SCROLL ── */
   const nav=document.getElementById('main-nav');
   if(nav)window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
