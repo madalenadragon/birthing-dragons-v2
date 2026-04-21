@@ -248,7 +248,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; line-height
   transition: var(--transition);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1180px) {
   .nav-links { display: none; }
   .nav-toggle { display: flex; }
   .nav-links.open {
