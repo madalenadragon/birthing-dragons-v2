@@ -233,10 +233,19 @@
         <h2 class="section-title fade-up">From Spiritual<br><em>to Human</em></h2>
         <div class="divider divider--center"></div>
         <p class="fade-up">How to ground your gifts into a body, a brand, and a business that changes everything. Enter your details below and I'll send it directly to you.</p>
-        <form class="form-row fade-up" onsubmit="return false;">
-          <input type="email" placeholder="Your email address" />
+        <form class="form-row fade-up" id="mc-home-form" onsubmit="grooveSubmit(event,'mc-home-form','mc-home-success')">
+          <input type="hidden" name="formid" value="681b5c15f1870a6228176703">
+          <input type="hidden" name="ip_address" value="false">
+          <input type="hidden" name="appUrl" value="https://app.groove.cm">
+          <input type="hidden" name="form_submit_type" value="raw_html">
+          <input type="hidden" name="random_hidden_key_JYVoODWR" value="">
+          <input type="email" name="email" placeholder="Your email address" required />
           <button class="btn btn-gold" type="submit">Send It</button>
         </form>
+        <div id="mc-home-success" style="display:none; text-align:center; padding: 1.5rem 0;">
+          <p style="font-family: var(--font-display); font-style: italic; font-size: 1.3rem; color: var(--gold);">You're in. Check your inbox.</p>
+          <p style="font-size: 0.85rem; color: var(--cream-dim); margin-top: 0.5rem;">The masterclass is on its way to you.</p>
+        </div>
         <p style="font-size:0.75rem; color: var(--cream-dim); opacity:0.5; margin-top: 1rem;">No spam. Unsubscribe any time.</p>
       </div>
     </div>
@@ -287,5 +296,6 @@
   </footer>
 
   <script src="nav.js"></script>
+  <script src="groove-forms.js"></script>
 </body>
 </html>

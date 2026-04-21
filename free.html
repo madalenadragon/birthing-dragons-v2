@@ -54,10 +54,22 @@
           <h2 style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-style: italic; color: var(--cream); margin-bottom: 1rem;">From Spiritual<br>to Human</h2>
           <div class="divider"></div>
           <p style="color: var(--cream-dim); margin-bottom: 2rem;">How to ground your gifts — your sensitivity, your knowing, your vision — into a real body, a real brand, and a real business that changes things. This is the foundational teaching.</p>
-          <form style="display: flex; gap: 0; max-width: 400px;" onsubmit="return false;">
-            <input type="email" placeholder="Your email address" style="flex:1; padding: 1rem 1.25rem; background: var(--obsidian); border: 1px solid rgba(196,152,90,0.3); border-right: none; color: var(--cream); font-family: var(--font-body); font-size: 0.9rem; outline: none;" />
-            <button class="btn btn-gold" type="submit">Access Now</button>
+          <form id="mc-free-form" onsubmit="grooveSubmit(event,'mc-free-form','mc-free-success')" style="max-width: 400px;">
+            <input type="hidden" name="formid" value="681b5c15f1870a6228176703">
+            <input type="hidden" name="ip_address" value="false">
+            <input type="hidden" name="appUrl" value="https://app.groove.cm">
+            <input type="hidden" name="form_submit_type" value="raw_html">
+            <input type="hidden" name="random_hidden_key_JYVoODWR" value="">
+            <input type="text" name="first_name" placeholder="Your first name" style="display:block; width:100%; padding: 1rem 1.25rem; background: var(--obsidian); border: 1px solid rgba(196,152,90,0.3); color: var(--cream); font-family: var(--font-body); font-size: 0.9rem; outline: none; margin-bottom: 0.75rem;" />
+            <div style="display:flex; gap:0;">
+              <input type="email" name="email" placeholder="Your email address" required style="flex:1; padding: 1rem 1.25rem; background: var(--obsidian); border: 1px solid rgba(196,152,90,0.3); border-right: none; color: var(--cream); font-family: var(--font-body); font-size: 0.9rem; outline: none;" />
+              <button class="btn btn-gold" type="submit">Access Now</button>
+            </div>
           </form>
+          <div id="mc-free-success" style="display:none; padding: 1.5rem 0;">
+            <p style="font-family: var(--font-display); font-style: italic; font-size: 1.3rem; color: var(--gold);">You're in. Check your inbox.</p>
+            <p style="font-size: 0.85rem; color: var(--cream-dim); margin-top: 0.5rem;">The masterclass is on its way to you.</p>
+          </div>
         </div>
         <div style="background: linear-gradient(135deg, var(--obsidian), #1A2318); height: 300px; border: 1px solid rgba(196,152,90,0.1); display:flex; align-items:center; justify-content:center;">
           <span style="font-family: var(--font-display); font-style: italic; color: rgba(196,152,90,0.3); font-size: 1.25rem;">Masterclass</span>
@@ -102,5 +114,6 @@
   </footer>
 
   <script src="nav.js"></script>
+  <script src="groove-forms.js"></script>
 </body>
 </html>
