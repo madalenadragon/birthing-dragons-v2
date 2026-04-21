@@ -638,6 +638,28 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; line-height
 }
 
 /* ============================================
+   FREE PAGE — featured lead magnet grid
+   ============================================ */
+.free-featured {
+  background: linear-gradient(135deg, var(--deep-forest), var(--charcoal));
+  border: 1px solid rgba(196,152,90,0.25);
+  padding: 4rem;
+  margin-bottom: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .free-featured {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+    gap: 1.5rem;
+  }
+}
+
+/* ============================================
    COURSES PAGE
    ============================================ */
 .course-card {
